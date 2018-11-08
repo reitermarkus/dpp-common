@@ -42,7 +42,7 @@
 #define __DPP_APP_MESSAGE_H__
 
 
-/* 
+/*
  * S T R U C T S
  */
 
@@ -57,7 +57,7 @@ typedef struct {
   uint16_t          core_vcc;               /* Core voltage [10^-3 V] */
   int16_t           core_temp;              /* Core temperature [10^-2 °C] */
   uint16_t          cpu_dc;                 /* CPU duty cycle [10^-2 %] */
-  uint8_t           stack;                  /* Stack [watermark over the last period in %] */  
+  uint8_t           stack;                  /* Stack [watermark over the last period in %] */
   uint8_t           nv_mem;                 /* Non-volatile memory usage [%] */
   uint16_t          supply_vcc;             /* Supply voltage [10^-3 V] */
   uint16_t          supply_current;         /* Supply [10^-5 A] */
@@ -91,7 +91,7 @@ typedef struct {
 
 
 #define DPP_GNSS_SV_LEN         42          /* bytes */
-typedef struct {    
+typedef struct {
   uint8_t           rcvTow[8];              /* Receiver time of week (converted from IEEE-754 to integer) */
   uint16_t          week;                   /* GPS week number */
   int8_t            leapS;                  /* GPS leap seconds */
@@ -131,6 +131,16 @@ typedef struct {
   uint8_t           adc_pga;                /* ADC PGA value. 0: PGA is off. */
   uint32_t          id;                     /* acquisition ID */
 } dpp_geophone_acq_t;
+
+#define DPP_GEOPHONE_ADC_LEN            DPP_MSG_PAYLOAD_LEN      /* bytes */
+#define DPP_GEOPHONE_ADC_HDR_LEN        8
+#define DPP_GEOPHONE_ADC_BPS            24  /* bits per sample */
+typedef struct {
+  uint32_t          acq_id;                 /* acquisition ID */
+  uint16_t          offset;                 /* offset from the start of the waveform, in bytes */
+  uint16_t          samples;                /* total no. of samples of this waveform */
+  uint8_t           adc_data[DPP_GEOPHONE_ADC_LEN - DPP_GEOPHONE_ADC_HDR_LEN];  /* use the remaining bytes of this packet to store the ADC samples */
+} dpp_geophone_adc_t;
 
 #pragma pack()
 

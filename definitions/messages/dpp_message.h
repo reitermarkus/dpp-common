@@ -41,7 +41,7 @@
 #define __DPP_MESSAGE_H__
 
 
-/* 
+/*
  * D E F I N E S
  */
 
@@ -58,7 +58,7 @@
  * indicate an minimal message) */
 #define DPP_MSG_TYPE_MIN          0x80    /* mask (msb) */
 #define DPP_MSG_MIN_PKT_LEN       128     /* uint8_t (max. 255) */
-#define DPP_MSG_MIN_HDR_LEN       4 
+#define DPP_MSG_MIN_HDR_LEN       4
 #define DPP_MSG_MIN_PAYLOAD_LEN   \
     (DPP_MSG_MIN_PKT_LEN - DPP_MSG_MIN_HDR_LEN - 2)
 #define DPP_MSG_MIN_LEN(msg)      \
@@ -95,6 +95,7 @@ typedef enum {
   DPP_MSG_TYPE_WGPS_STATUS  = 35,   /* Wireless GPS  */
   DPP_MSG_TYPE_GEOPHONE_ACQ = 36,   /* Geophone acquire data */
   DPP_MSG_TYPE_IMU          = 37,   /* imu data */
+  DPP_MSG_TYPE_ADCDATA      = 38,   /* event acquistion (ADC) data */
 
   /* no types below this */
   DPP_MSG_TYPE_LASTID       = 127
@@ -114,7 +115,7 @@ typedef uint64_t dpp_timestamp_t;
 #include "dpp_com_message.h"
 #include "dpp_app_message.h"
 
-/* 
+/*
  * S T R U C T S
  */
 
@@ -156,11 +157,11 @@ typedef struct {
 
 #define DPP_FW_HDR_LEN      4
 #define DPP_FW_BLOCK_SIZE   64
-typedef struct {  
+typedef struct {
   dpp_fw_type_t type : 8;
   uint8_t       component_id;
   uint16_t      version;
-  union {        
+  union {
     struct {
       uint16_t  len;    /* total length in bytes */
       uint32_t  crc;    /* 32bit CRC over complete FW data ('len' bytes) */
@@ -168,7 +169,7 @@ typedef struct {
     struct {
       uint16_t  ofs;    /* offset = block ID (starting from 0) */
       uint8_t   data[DPP_FW_BLOCK_SIZE];
-    } data;    
+    } data;
     struct {
       uint16_t  num;    /* 16-bit to avoid alignment issues */
       uint16_t  block_ids[(DPP_MSG_PAYLOAD_LEN - 2 - DPP_FW_HDR_LEN) / 2];
@@ -204,6 +205,7 @@ typedef struct {
     dpp_fw_t            firmware;
     dpp_lwb_health_t    lwb_health;
     dpp_geophone_acq_t  geo_acq;
+    dpp_geophone_adc_t  geo_adc;
     uint8_t             payload[DPP_MSG_PAYLOAD_LEN + 2];   /* raw bytes (add +2 to increase overall structure size to include the crc!) */
     uint16_t            payload16[DPP_MSG_PAYLOAD_LEN / 2]; /* rounded down! */
   };
@@ -253,7 +255,7 @@ typedef struct {
     #error "BOLT max msg length is too small"
   #endif
 #endif /* BOLT_CONF_MAX_MSG_LEN */
-    
+
 #if DPP_FW_BLOCK_SIZE > (DPP_MSG_PAYLOAD_LEN - 2 - DPP_FW_HDR_LEN)
   #error "DPP_FW_BLOCK_SIZE is too big"
 #endif /* DPP_FW_BLOCK_SIZE */

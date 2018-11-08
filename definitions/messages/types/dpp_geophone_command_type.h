@@ -29,20 +29,20 @@
  *
  * Authors: Reto Da Forno
  *          Tonio Gsell
- *          Akos Pasztor      
+ *          Akos Pasztor
  */
 
-/* 
+/*
  * command types specific to APP (application processor)
  *
- * 
+ *
  * typedef enum {
  *   ...
  *   DPP_COMMAND_[device_name]  = [start_id],
  *   [your_defines]
- *   ...  
+ *   ...
  * } dpp_command_type_t;
- * 
+ *
  * add a comma after each define!
  */
 
@@ -51,7 +51,7 @@
 CMD_GEOPHONE_RESET,         /* 0x01 | Perform Reset */                  /* @param none */
 CMD_GEOPHONE_SELFTEST,      /* 0x02 | Perform Self-Test */              /* @param none */
 CMD_GEOPHONE_OPMODE,        /* 0x03 | Operation Mode */                 /* @param 0: normal, @see enum OpModes */
-CMD_GEOPHONE_EXTTRG,        /* 0x04 | External Trigger */               /* @param none */         
+CMD_GEOPHONE_EXTTRG,        /* 0x04 | External Trigger */               /* @param none */
 CMD_GEOPHONE_TRG_GAIN,      /* 0x05 | Trigger Amplification Gain */     /* @param 0: stage1, 1: stage2 */
 CMD_GEOPHONE_TRG_TH_POS,    /* 0x06 | Trigger Positive Threshold */     /* @param voltage [1500-3000] mV */
 CMD_GEOPHONE_TRG_TH_NEG,    /* 0x07 | Trigger Negative Threshold */     /* @param voltage [0-1500] mV */
@@ -60,6 +60,7 @@ CMD_GEOPHONE_TIMEOUT,       /* 0x09 | ADC Sampling Timeout */           /* @para
 CMD_GEOPHONE_ADC_PGA,       /* 0x0A | ADC PGA Value */                  /* @param [0-128] */
 CMD_GEOPHONE_ADC_FORMAT,    /* 0x0B | ADC Output Format */              /* @param 0: two's complement, 1: offset binary */
 CMD_GEOPHONE_IMU_FREQ,      /* 0x0C | IMU Sampling Frequency */         /* @param [0-10] Hz */
+CMD_GEOPHONE_REQ_ADCDATA,   /* 0x0D | Request ADC data (waveform) */    /* @param acquisition ID */
 
 
 /* Label ------------------- | #No. | Description ----------------------------*/
