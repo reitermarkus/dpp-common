@@ -197,7 +197,7 @@ typedef struct {
     dpp_app_health_t    app_health;
     dpp_command_t       cmd;
     dpp_node_info_t     node_info;
-    dpp_event_t         event;
+    dpp_event_t         evt;								/* do not rename to 'event', compiler usage in TinyOS */
     dpp_imu_t           imu;
     dpp_gnss_sv_t       gnss_sv;
     dpp_wgps_status_t   wgps_status;

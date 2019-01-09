@@ -77,7 +77,7 @@ typedef struct {
 } dpp_imu_t;
 
 
-#define DPP_WGPS_STATUS_LEN     18          /* bytes */
+#define DPP_WGPS_STATUS_LEN     30          /* bytes */
 typedef struct {
   int16_t           inc_x;                  /* Inclinometer X raw data */
   int16_t           inc_y;                  /* Inclinometer Y raw data */
@@ -86,6 +86,12 @@ typedef struct {
   uint16_t          app_health_queue;       /* Number of app_health messages in queue */
   uint16_t          event_queue;            /* Number of events in queue */
   uint32_t          card_usage;             /* Card usage [kB] */
+  uint16_t          acc_x;                  /* Accelerometer X-axis raw data */
+  uint16_t          acc_y;                  /* Accelerometer Y-axis raw data */
+  uint16_t          acc_z;                  /* Accelerometer Z-axis raw data */
+  uint16_t          mag_x;                  /* Magnetometer X-axis raw data */
+  uint16_t          mag_y;                  /* Magnetometer Y-axis raw data */
+  uint16_t          mag_z;                  /* Magnetometer Z-axis raw data */
   uint16_t          status;                 /* Bit0: gps power state (on/off) */
 } dpp_wgps_status_t;
 
