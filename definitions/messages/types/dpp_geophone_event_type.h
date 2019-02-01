@@ -29,7 +29,7 @@
  *
  * Authors: Reto Da Forno
  *          Tonio Gsell
- *          Akos Pasztor      
+ *          Akos Pasztor
  */
 
 /* 
@@ -89,7 +89,8 @@ EVENT_GEOPHONE_VCC_OOR,             /* 0x24 | Battery VCC value is out-of-range 
 EVENT_GEOPHONE_TEMP_OOR,            /* 0x25 | Temperature value is out-of-range */
 EVENT_GEOPHONE_HUMID_OOR,           /* 0x26 | Humidity value is out-of-range */
 
-
+EVENT_GEOPHONE_RB_FULL,             /* 0x27 | Ring buffer full (argument: buffer ID) */
+EVENT_GEOPHONE_SD_IO_ERROR,         /* 0x28 | SD card read or write error */
 
 
 /* Label ------------------- | #No. | Description ----------------------------*/

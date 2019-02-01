@@ -138,13 +138,23 @@ typedef struct {
   uint32_t          id;                     /* acquisition ID */
 } dpp_geophone_acq_t;
 
-#define DPP_GEOPHONE_ADC_LEN            DPP_MSG_PAYLOAD_LEN      /* bytes */
-#define DPP_GEOPHONE_ADC_HDR_LEN        8
-#define DPP_GEOPHONE_ADC_BPS            24  /* bits per sample */
+
+#define DPP_GEOPHONE_ADC_LEN                   DPP_MSG_PAYLOAD_LEN
+#define DPP_GEOPHONE_ADC_HDR_LEN               7
+#define DPP_GEOPHONE_ADC_DFMT_BITS_MASK        0x0f      /* 4 bits used for # adc bits per sample b (divided by 2) */
+#define DPP_GEOPHONE_ADC_DFMT_SUBSAMPLING_MASK 0x30      /* 2 bits used for subsampling exponent s (factor = 2^s) */
+#define DPP_GEOPHONE_ADC_DFMT_COMPRESSED_MASK  0xc0      /* 2 used to indicate compressed data format */
+#define DPP_GEOPHONE_ADC_DFMT_BITS(adc_df)               (((adc_df) & DPP_GEOPHONE_ADC_DFMT_BITS_MASK) << 1)
+#define DPP_GEOPHONE_ADC_DFMT_SUBSAMPLING(adc_df)        (((adc_df) & DPP_GEOPHONE_ADC_DFMT_SUBSAMPLING_MASK) >> 4)
+#define DPP_GEOPHONE_ADC_DFMT_COMPRESSED(adc_df)         (((adc_df) & DPP_GEOPHONE_ADC_DFMT_COMPRESSED_MASK) >> 6)
+#define DPP_GEOPHONE_SET_ADC_DFMT(adc_df, b, s, c)       ((adc_df) = ((((b) >> 1) & DPP_GEOPHONE_ADC_DFMT_BITS_MASK))  | \
+                                                                      (((s) << 4) & DPP_GEOPHONE_ADC_DFMT_SUBSAMPLING_MASK) | \
+                                                                      (((c) << 6) & DPP_GEOPHONE_ADC_DFMT_COMPRESSED_MASK))
 typedef struct {
   uint32_t          acq_id;                 /* acquisition ID */
-  uint16_t          offset;                 /* offset from the start of the waveform, in bytes */
-  uint16_t          samples;                /* total no. of samples of this waveform */
+  uint8_t           offset;                 /* offset from the start of the waveform, in no. of packets */
+  uint8_t           packets;                /* total no. of packets for this waveform */
+  uint8_t           adc_data_fmt;           /* data format for the adc samples */
   uint8_t           adc_data[DPP_GEOPHONE_ADC_LEN - DPP_GEOPHONE_ADC_HDR_LEN];  /* use the remaining bytes of this packet to store the ADC samples */
 } dpp_geophone_adc_t;
 
