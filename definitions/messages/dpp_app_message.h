@@ -117,7 +117,7 @@ typedef struct {
 } dpp_gnss_sv_t;
 
 
-#define DPP_GEOPHONE_ACQ_LEN    66          /* bytes*/
+#define DPP_GEOPHONE_ACQ_LEN    65          /* bytes*/
 typedef struct {
   uint64_t          start_time;             /* Timestamp of trigger */
   uint64_t          first_time;             /* Timestamp of first ADC sample */
