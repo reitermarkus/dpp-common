@@ -61,6 +61,7 @@ CMD_GEOPHONE_ADC_PGA,       /* 0x0A | ADC PGA Value */                  /* @para
 CMD_GEOPHONE_ADC_FORMAT,    /* 0x0B | ADC Output Format */              /* @param 0: two's complement, 1: offset binary */
 CMD_GEOPHONE_IMU_FREQ,      /* 0x0C | IMU Sampling Frequency */         /* @param [0-10] Hz */
 CMD_GEOPHONE_REQ_ADCDATA,   /* 0x0D | Request ADC data (waveform) */    /* @param acquisition ID (32-bit), mode (8-bit) */
+CMD_GEOPHONE_ADC_SPS,       /* 0x0E | ADC Rate (samples per second) */  /* @param rate: 0 = 1kHz, 1 = 500Hz, 2 = 250Hz, 3 = 125Hz */
 
 
 /* Label ------------------- | #No. | Description ----------------------------*/

@@ -117,7 +117,7 @@ typedef struct {
 } dpp_gnss_sv_t;
 
 
-#define DPP_GEOPHONE_ACQ_LEN    64          /* bytes*/
+#define DPP_GEOPHONE_ACQ_LEN    66          /* bytes*/
 typedef struct {
   uint64_t          start_time;             /* Timestamp of trigger */
   uint64_t          first_time;             /* Timestamp of first ADC sample */
@@ -135,15 +135,16 @@ typedef struct {
   uint16_t          trg_th_neg;             /* Negative TRG threshold value [mV] */
   uint8_t           trg_source;             /* Source of initial trigger. 0: external | 1: positive threshold, 2: negative threshold */
   uint8_t           adc_pga;                /* ADC PGA value. 0: PGA is off. */
-  uint32_t          id;                     /* acquisition ID */
+  uint32_t          acq_id;                 /* Acquisition ID */
+  uint8_t           adc_sps;                /* ADC rate (sampling frequency), 0 = 1kHz, 1 = 500Hz, 2 = 250Hz, 3 = 125Hz */
 } dpp_geophone_acq_t;
 
 
 #define DPP_GEOPHONE_ADC_LEN                   DPP_MSG_PAYLOAD_LEN
 #define DPP_GEOPHONE_ADC_HDR_LEN               7
-#define DPP_GEOPHONE_ADC_DFMT_BITS_MASK        0x0f      /* 4 bits used for # adc bits per sample b (divided by 2) */
+#define DPP_GEOPHONE_ADC_DFMT_BITS_MASK        0x0f      /* 4 bits used for # adc bits per sample b (divided by 2). Note: 0 = default / full native resolution */
 #define DPP_GEOPHONE_ADC_DFMT_SUBSAMPLING_MASK 0x30      /* 2 bits used for subsampling exponent s (factor = 2^s) */
-#define DPP_GEOPHONE_ADC_DFMT_COMPRESSED_MASK  0xc0      /* 2 used to indicate compressed data format */
+#define DPP_GEOPHONE_ADC_DFMT_COMPRESSED_MASK  0xc0      /* 2 used to indicate compressed data format. 0 = no compression. */
 #define DPP_GEOPHONE_ADC_DFMT_BITS(adc_df)               (((adc_df) & DPP_GEOPHONE_ADC_DFMT_BITS_MASK) << 1)
 #define DPP_GEOPHONE_ADC_DFMT_SUBSAMPLING(adc_df)        (((adc_df) & DPP_GEOPHONE_ADC_DFMT_SUBSAMPLING_MASK) >> 4)
 #define DPP_GEOPHONE_ADC_DFMT_COMPRESSED(adc_df)         (((adc_df) & DPP_GEOPHONE_ADC_DFMT_COMPRESSED_MASK) >> 6)
@@ -154,7 +155,7 @@ typedef struct {
   uint32_t          acq_id;                 /* acquisition ID */
   uint8_t           offset;                 /* offset from the start of the waveform, in no. of packets */
   uint8_t           packets;                /* total no. of packets for this waveform */
-  uint8_t           adc_data_fmt;           /* data format for the adc samples */
+  uint8_t           adc_data_fmt;           /* data format for the adc samples (see above) */
   uint8_t           adc_data[DPP_GEOPHONE_ADC_LEN - DPP_GEOPHONE_ADC_HDR_LEN];  /* use the remaining bytes of this packet to store the ADC samples */
 } dpp_geophone_adc_t;
 

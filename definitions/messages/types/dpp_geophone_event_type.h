@@ -78,7 +78,7 @@ EVENT_GEOPHONE_CMD_FORMAT,          /* 0x1A | APP CMD: set ADC data format. Valu
 EVENT_GEOPHONE_CMD_IMUFREQ,         /* 0x1B | APP CMD: set IMU sampling frequency. Value: frequency [Hz] */
 EVENT_GEOPHONE_MSC_MOUNT,           /* 0x1C | USB MSC mounted */
 EVENT_GEOPHONE_MSC_EJECT,           /* 0x1D | USB MSC ejected */
-EVENT_GEOPHONE_NA_0x1E,             /* 0x1E | */
+EVENT_GEOPHONE_CMD_SPS,             /* 0x1E | APP CMD: set ADC rate (SPS). Value: frequency [Hz] */
 EVENT_GEOPHONE_CMD_OPMODE,          /* 0x1F | APP CMD: set operating mode. Value: @see enum OpModes */
 
 EVENT_GEOPHONE_STACK_90,            /* 0x20 | RTOS stack watermark 90% reached. Value: task ID */
@@ -91,6 +91,8 @@ EVENT_GEOPHONE_HUMID_OOR,           /* 0x26 | Humidity value is out-of-range */
 
 EVENT_GEOPHONE_RB_FULL,             /* 0x27 | Ring buffer full (argument: buffer ID) */
 EVENT_GEOPHONE_SD_IO_ERROR,         /* 0x28 | SD card read or write error */
+EVENT_GEOPHONE_SD_INV_FILE,         /* 0x29 | File does not exist or is invalid */
+EVENT_GEOPHONE_CMD_REQ_ADCDATA,     /* 0x2a | APP CMD: get ADC data (waveform). Value: error code */
 
 
 /* Label ------------------- | #No. | Description ----------------------------*/
