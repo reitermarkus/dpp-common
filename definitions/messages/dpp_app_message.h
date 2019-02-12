@@ -141,20 +141,20 @@ typedef struct {
 
 
 #define DPP_GEOPHONE_ADC_LEN                   DPP_MSG_PAYLOAD_LEN
-#define DPP_GEOPHONE_ADC_HDR_LEN               7
-#define DPP_GEOPHONE_ADC_DFMT_BITS_MASK        0x0f      /* 4 bits used for # adc bits per sample b (divided by 2). Note: 0 = default / full native resolution */
-#define DPP_GEOPHONE_ADC_DFMT_SUBSAMPLING_MASK 0x30      /* 2 bits used for subsampling exponent s (factor = 2^s) */
-#define DPP_GEOPHONE_ADC_DFMT_COMPRESSED_MASK  0xc0      /* 2 used to indicate compressed data format. 0 = no compression. */
-#define DPP_GEOPHONE_ADC_DFMT_BITS(adc_df)               (((adc_df) & DPP_GEOPHONE_ADC_DFMT_BITS_MASK) << 1)
-#define DPP_GEOPHONE_ADC_DFMT_SUBSAMPLING(adc_df)        (((adc_df) & DPP_GEOPHONE_ADC_DFMT_SUBSAMPLING_MASK) >> 4)
-#define DPP_GEOPHONE_ADC_DFMT_COMPRESSED(adc_df)         (((adc_df) & DPP_GEOPHONE_ADC_DFMT_COMPRESSED_MASK) >> 6)
-#define DPP_GEOPHONE_SET_ADC_DFMT(adc_df, b, s, c)       ((adc_df) = ((((b) >> 1) & DPP_GEOPHONE_ADC_DFMT_BITS_MASK))  | \
-                                                                      (((s) << 4) & DPP_GEOPHONE_ADC_DFMT_SUBSAMPLING_MASK) | \
-                                                                      (((c) << 6) & DPP_GEOPHONE_ADC_DFMT_COMPRESSED_MASK))
+#define DPP_GEOPHONE_ADC_HDR_LEN               9
+#define DPP_GEOPHONE_ADC_DFMT_BPS_MASK         0x03      /* 2 bits used for # adc bits per sample: 0 (native), 1 (8 bit), 2 (16), 3 (24) */
+#define DPP_GEOPHONE_ADC_DFMT_SUBSAMPLING_MASK 0x0c      /* 2 bits used for subsampling exponent s (factor = 2^s) */
+#define DPP_GEOPHONE_ADC_DFMT_TYPE_MASK        0xf0      /* 4 used to indicate the data format type (normal, compressed, FFT, ...) */
+#define DPP_GEOPHONE_ADC_DFMT_BPS(adc_df)                ((adc_df) & DPP_GEOPHONE_ADC_DFMT_BPS_MASK)
+#define DPP_GEOPHONE_ADC_DFMT_SUBSAMPLING(adc_df)        (((adc_df) & DPP_GEOPHONE_ADC_DFMT_SUBSAMPLING_MASK) >> 2)
+#define DPP_GEOPHONE_ADC_DFMT_TYPE(adc_df)               (((adc_df) & DPP_GEOPHONE_ADC_DFMT_TYPE_MASK) >> 4)
+#define DPP_GEOPHONE_SET_ADC_DFMT(adc_df, b, s, c)       ((adc_df) = (((b) & DPP_GEOPHONE_ADC_DFMT_BPS_MASK))  | \
+                                                                     (((s) << 2) & DPP_GEOPHONE_ADC_DFMT_SUBSAMPLING_MASK) | \
+                                                                     (((c) << 4) & DPP_GEOPHONE_ADC_DFMT_TYPE_MASK))
 typedef struct {
   uint32_t          acq_id;                 /* acquisition ID */
-  uint8_t           offset;                 /* offset from the start of the waveform, in no. of packets */
-  uint8_t           packets;                /* total no. of packets for this waveform */
+  uint16_t          offset;                 /* offset from the start of the waveform, in no. of packets */
+  uint16_t          packets;                /* total no. of packets for this waveform */
   uint8_t           adc_data_fmt;           /* data format for the adc samples (see above) */
   uint8_t           adc_data[DPP_GEOPHONE_ADC_LEN - DPP_GEOPHONE_ADC_HDR_LEN];  /* use the remaining bytes of this packet to store the ADC samples */
 } dpp_geophone_adc_t;
