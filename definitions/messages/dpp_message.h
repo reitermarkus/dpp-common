@@ -151,6 +151,7 @@ typedef struct {
   union {
     uint8_t           arg[DPP_MSG_PAYLOAD_LEN - 2];   /* arguments (length depends on command) */
     uint16_t          arg16[(DPP_MSG_PAYLOAD_LEN - 2) / 2];
+    uint32_t          arg32[(DPP_MSG_PAYLOAD_LEN - 2) / 4];
   };
 } dpp_command_t;
 
