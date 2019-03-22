@@ -94,6 +94,7 @@ EVENT_GEOPHONE_SD_IO_ERROR,         /* 0x28 | SD card read or write error */
 EVENT_GEOPHONE_SD_INV_FILE,         /* 0x29 | File does not exist or is invalid */
 EVENT_GEOPHONE_CMD_REQ_ADCDATA,     /* 0x2a | APP CMD: get ADC data (waveform). Value: error code */
 EVENT_GEOPHONE_CMD_DEL_DATA,        /* 0x2b | APP CMD: data from SD card deleted. Value: # deleted files */
+EVENT_GEOPHONE_CMD_RESET_CFG,       /* 0x2c | APP CMD: config has been reset to the default values */
 
 
 /* Label ------------------- | #No. | Description ----------------------------*/

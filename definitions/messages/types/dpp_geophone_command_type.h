@@ -63,5 +63,6 @@ CMD_GEOPHONE_IMU_FREQ,      /* 0x0C | IMU Sampling Frequency */         /* @para
 CMD_GEOPHONE_REQ_ADCDATA,   /* 0x0D | Request ADC data (waveform) */    /* @param acquisition ID (32-bit), mode (8-bit) */
 CMD_GEOPHONE_ADC_SPS,       /* 0x0E | ADC Rate (samples per second) */  /* @param rate: 0 = 1kHz, 1 = 500Hz, 2 = 250Hz, 3 = 125Hz */
 CMD_GEOPHONE_DEL_DATA,      /* 0x0F | Delete data on SD card */         /* @param start and end UTC timestamp in s (2x 32-bit) */
+CMD_GEOPHONE_RESET_CFG,     /* 0x10 | Reset config to default values */ /* @param none */
 
 /* Label ------------------- | #No. | Description ----------------------------*/
