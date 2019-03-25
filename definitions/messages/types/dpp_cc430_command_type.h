@@ -54,10 +54,9 @@ CMD_CC430_SET_HEALTH_PERIOD,      /* 0x03 | period for health messages in second
 CMD_CC430_SET_EVENT_LEVEL,        /* 0x04 | event notification level */
 CMD_CC430_SET_TX_POWER,           /* 0x05 | set radio transmit power, 0 = -30dBm, 1 = -12dBm, 2 = -6dBm, 3 = 0dBm, 4 = +10dBm, 5 = MAX (~+12) */
 CMD_CC430_SET_DBG_FLAGS,          /* 0x06 | set debug flags (1 = turn LEDs off) */
-
 CMD_CC430_DBG_READ_MEM,           /* 0x07 | for debugging: read memory location, address (16-bit) + length (8-bit), max. 32 bytes */
-
 CMD_CC430_ADD_NODE,               /* 0x08 | register a node ID in the network (only host nodes handle this command) */
+CMD_CC430_SET_NODE_ID,            /* 0x09 | change the device ID of a source node (only as a workaround in case a node loses its configuration) */
 
 /* last symbol in this file must be a comma */
 
