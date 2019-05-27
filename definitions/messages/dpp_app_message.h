@@ -76,6 +76,16 @@ typedef struct {
   uint16_t          mag_z;                  /* Magnetometer Z-axis raw data */
 } dpp_imu_t;
 
+#define DPP_INCLINO_LEN			12          /* bytes */
+typedef struct {
+  uint16_t          acc_x;                  /* Accelerometer X-axis raw data */
+  uint16_t          acc_y;                  /* Accelerometer Y-axis raw data */
+  uint16_t          acc_z;                  /* Accelerometer Z-axis raw data */
+  uint16_t          ang_x;                  /* Angle X-axis raw data */
+  uint16_t          ang_y;                  /* Angle Y-axis raw data */
+  uint16_t          ang_z;                  /* Angle Z-axis raw data */
+} dpp_inclino_t;
+
 
 #define DPP_WGPS_STATUS_LEN     30          /* bytes */
 typedef struct {
