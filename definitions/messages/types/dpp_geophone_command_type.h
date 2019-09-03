@@ -59,12 +59,12 @@ CMD_GEOPHONE_POSTTRG,       /* 0x08 | ADC Post-trigger interval */      /* @para
 CMD_GEOPHONE_TIMEOUT,       /* 0x09 | ADC Sampling Timeout */           /* @param > 0 seconds */
 CMD_GEOPHONE_ADC_PGA,       /* 0x0A | ADC PGA Value */                  /* @param [0-128] */
 CMD_GEOPHONE_ADC_FORMAT,    /* 0x0B | ADC Output Format */              /* @param 0: two's complement, 1: offset binary */
-CMD_GEOPHONE_REQ_ADCDATA,   /* 0x0C | Request ADC data (waveform) */    /* @param acquisition ID (32-bit), mode (8-bit) */
-CMD_GEOPHONE_ADC_SPS,       /* 0x0D | ADC Rate (samples per second) */  /* @param rate: 0 = 1kHz, 1 = 500Hz, 2 = 250Hz, 3 = 125Hz */
-CMD_GEOPHONE_DEL_DATA,      /* 0x0E | Delete data on SD card */         /* @param start and end UTC timestamp in s (2x 32-bit) */
-CMD_GEOPHONE_RESET_CFG,     /* 0x0F | Reset config to default values */ /* @param none */
-CMD_GEOPHONE_IMU_FREQ_LP,   /* 0x10 | IMU Frequency Low Power */        /* @param [0-800] Hz */
-CMD_GEOPHONE_IMU_FREQ_HP,   /* 0x11 | IMU Frequency High Power */       /* @param [0-800] Hz */
+CMD_GEOPHONE_IMU_FREQ_HP,   /* 0x0C | IMU Frequency High Power */       /* @param [0-800] Hz */
+CMD_GEOPHONE_REQ_ADCDATA,   /* 0x0D | Request ADC data (waveform) */    /* @param acquisition ID (32-bit), mode (8-bit) */
+CMD_GEOPHONE_ADC_SPS,       /* 0x0E | ADC Rate (samples per second) */  /* @param rate: 0 = 1kHz, 1 = 500Hz, 2 = 250Hz, 3 = 125Hz */
+CMD_GEOPHONE_DEL_DATA,      /* 0x0F | Delete data on SD card */         /* @param start and end UTC timestamp in s (2x 32-bit) */
+CMD_GEOPHONE_RESET_CFG,     /* 0x10 | Reset config to default values */ /* @param none */
+CMD_GEOPHONE_IMU_FREQ_LP,   /* 0x11 | IMU Frequency Low Power */        /* @param [0-800] Hz */
 CMD_GEOPHONE_IMU_FREQ_AA,   /* 0x12 | IMU Frequency Anti-Aliasing */    /* @param [0-400] Hz */
 CMD_GEOPHONE_IMU_OPMODE,    /* 0x13 | IMU Operation Mode */             /* @param 0: normal */
 CMD_GEOPHONE_IMU_TRG_LVL,   /* 0x14 | IMU Trigger Level */              /* @param 1: lowest setting */

@@ -75,11 +75,11 @@ EVENT_GEOPHONE_CMD_POSTTRG,         /* 0x17 | APP CMD: set post-triggering. Valu
 EVENT_GEOPHONE_CMD_TIMEOUT,         /* 0x18 | APP CMD: set sampling timeout. Value: interval [s] */
 EVENT_GEOPHONE_CMD_PGA,             /* 0x19 | APP CMD: set ADC PGA. Value: gain */
 EVENT_GEOPHONE_CMD_FORMAT,          /* 0x1A | APP CMD: set ADC data format. Value: data-format */
-EVENT_GEOPHONE_CMD_IMUFREQ,         /* 0x1B | APP CMD: set IMU sampling frequency. Value: frequency [Hz] */
+EVENT_GEOPHONE_CMD_IMU_FREQ_HP,     /* 0x1B | APP CMD: set IMU frequency High-power. Value: frequency [Hz] */
 EVENT_GEOPHONE_MSC_MOUNT,           /* 0x1C | USB MSC mounted */
 EVENT_GEOPHONE_MSC_EJECT,           /* 0x1D | USB MSC ejected */
 EVENT_GEOPHONE_CMD_SPS,             /* 0x1E | APP CMD: set ADC rate (SPS). Value: frequency [Hz] */
-EVENT_GEOPHONE_CMD_OPMODE,          /* 0x1F | APP CMD: set operating mode. Value: @see enum OpModes */
+EVENT_GEOPHONE_CMD_SYS_OPMODE,      /* 0x1F | APP CMD: set operating mode. Value: @see enum OpModes */
 
 EVENT_GEOPHONE_STACK_90,            /* 0x20 | RTOS stack watermark 90% reached. Value: task ID */
 EVENT_GEOPHONE_STACK_TMRSVC,        /* 0x21 | Timer Daemon Stack watermark 90% reached. Value: stack usage percentage */
@@ -92,9 +92,14 @@ EVENT_GEOPHONE_HUMID_OOR,           /* 0x26 | Humidity value is out-of-range */
 EVENT_GEOPHONE_RB_FULL,             /* 0x27 | Ring buffer full (argument: buffer ID) */
 EVENT_GEOPHONE_SD_IO_ERROR,         /* 0x28 | SD card read or write error */
 EVENT_GEOPHONE_SD_INV_FILE,         /* 0x29 | File does not exist or is invalid */
-EVENT_GEOPHONE_CMD_REQ_ADCDATA,     /* 0x2a | APP CMD: get ADC data (waveform). Value: error code */
-EVENT_GEOPHONE_CMD_DEL_DATA,        /* 0x2b | APP CMD: data from SD card deleted. Value: # deleted files */
-EVENT_GEOPHONE_CMD_RESET_CFG,       /* 0x2c | APP CMD: config has been reset to the default values */
+EVENT_GEOPHONE_CMD_REQ_ADCDATA,     /* 0x2A | APP CMD: get ADC data (waveform). Value: error code */
+EVENT_GEOPHONE_CMD_DEL_DATA,        /* 0x2B | APP CMD: data from SD card deleted. Value: # deleted files */
+EVENT_GEOPHONE_CMD_RESET_CFG,       /* 0x2C | APP CMD: config has been reset to the default values */
+EVENT_GEOPHONE_CMD_IMU_FREQ_LP,     /* 0x2D | APP CMD: set IMU frequency Low-power. Value: frequency [Hz] */
+EVENT_GEOPHONE_CMD_IMU_FREQ_AA,     /* 0x2E | APP CMD: set IMU frequency Anti-Aliasing. Value: frequency [Hz] */
+EVENT_GEOPHONE_CMD_IMU_OPMODE,      /* 0x2F | APP CMD: set IMU Operation Mode. */
+EVENT_GEOPHONE_CMD_IMU_TRG_LVL,     /* 0x30 | APP CMD: set IMU Trigger Level. */
+EVENT_GEOPHONE_CMD_IMU_DATA_DEC,    /* 0x31 | APP CMD: set IMU Data Decimation. Value: samples */
 
 
 /* Label ------------------- | #No. | Description ----------------------------*/
