@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Swiss Federal Institute of Technology (ETH Zurich).
+ * Copyright (c) 2019, Swiss Federal Institute of Technology (ETH Zurich).
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -76,7 +76,7 @@ typedef struct {
   uint16_t          mag_z;                  /* Magnetometer Z-axis raw data */
 } dpp_imu_t;
 
-#define DPP_INCLINO_LEN			12          /* bytes */
+#define DPP_INCLINO_LEN         22          /* bytes */
 typedef struct {
   uint16_t          acc_x;                  /* Accelerometer X-axis raw data */
   uint16_t          acc_y;                  /* Accelerometer Y-axis raw data */
@@ -84,6 +84,9 @@ typedef struct {
   uint16_t          ang_x;                  /* Angle X-axis raw data */
   uint16_t          ang_y;                  /* Angle Y-axis raw data */
   uint16_t          ang_z;                  /* Angle Z-axis raw data */
+  uint32_t          current_time;           /* Current timestamp of the measurement [sec] */
+  uint32_t          samples;                /* Total no. of samples */
+  uint16_t          temperature;            /* Temperature */
 } dpp_inclino_t;
 
 
@@ -106,7 +109,7 @@ typedef struct {
 } dpp_wgps_status_t;
 
 
-#define DPP_GNSS_SV_LEN         42          /* bytes */
+#define DPP_GNSS_SV_LEN         46          /* bytes */
 typedef struct {
   uint8_t           rcvTow[8];              /* Receiver time of week (converted from IEEE-754 to integer) */
   uint16_t          week;                   /* GPS week number */
@@ -124,6 +127,7 @@ typedef struct {
   uint8_t           cpStDev;                /* Estimated carrier-phase std. deviation */
   uint8_t           doStDev;                /* Estimated doppler std. deviation */
   uint8_t           trkStat;                /* Tracking status bitfield */
+  uint32_t          samples;                /* Total number of sample, to find out which data belong together */
 } dpp_gnss_sv_t;
 
 

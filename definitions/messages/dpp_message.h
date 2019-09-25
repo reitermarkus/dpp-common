@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Swiss Federal Institute of Technology (ETH Zurich).
+ * Copyright (c) 2019, Swiss Federal Institute of Technology (ETH Zurich).
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -96,7 +96,7 @@ typedef enum {
   DPP_MSG_TYPE_GEOPHONE_ACQ = 36,   /* Geophone acquire data */
   DPP_MSG_TYPE_IMU          = 37,   /* imu data */
   DPP_MSG_TYPE_ADCDATA      = 38,   /* event acquistion (ADC) data */
-  DPP_MSG_TYPE_INCLINO		= 39,	/* inclinometer data */
+  DPP_MSG_TYPE_INCLINO      = 39,   /* inclinometer data */
 
   /* no types below this */
   DPP_MSG_TYPE_LASTID       = 127
@@ -199,9 +199,9 @@ typedef struct {
     dpp_app_health_t    app_health;
     dpp_command_t       cmd;
     dpp_node_info_t     node_info;
-    dpp_event_t         evt;								/* do not rename to 'event', compiler usage in TinyOS */
+    dpp_event_t         evt;              /* do not rename to 'event', compiler usage in TinyOS */
     dpp_imu_t           imu;
-    dpp_inclino_t		inclino;
+    dpp_inclino_t       inclino;
     dpp_gnss_sv_t       gnss_sv;
     dpp_wgps_status_t   wgps_status;
     dpp_timestamp_t     timestamp;

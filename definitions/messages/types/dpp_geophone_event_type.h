@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Swiss Federal Institute of Technology (ETH Zurich).
+ * Copyright (c) 2019, Swiss Federal Institute of Technology (ETH Zurich).
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -46,7 +46,7 @@
  * add a comma after each define!
  */
 
-/* Label -------------------------- | #No. | Description ---------------------*/
+/* Label --------------------------- | #No. | Description ---------------------*/
 
 EVENT_GEOPHONE_START,               /* 0x01 | Application and OS started */
 EVENT_GEOPHONE_SELFTEST,            /* 0x02 | Self-Test. Value: result of self-test */
@@ -101,5 +101,10 @@ EVENT_GEOPHONE_CMD_IMU_OPMODE,      /* 0x2F | APP CMD: set IMU Operation Mode. *
 EVENT_GEOPHONE_CMD_IMU_TRG_LVL,     /* 0x30 | APP CMD: set IMU Trigger Level. */
 EVENT_GEOPHONE_CMD_IMU_DATA_DEC,    /* 0x31 | APP CMD: set IMU Data Decimation. Value: samples */
 
+EVENT_GEOPHONE_SCHED_CL_ERR,        /* 0x32 | Scheduler clear error */
+EVENT_GEOPHONE_SCHED_WR_ERR,        /* 0x33 | Add an entry to the scheduler error */
+EVENT_GEOPHONE_CMD_SYS_WAKEUP_TIME, /* 0x34 | APP CMD: set new Wakeup time. Remember to make an application reset afterwarts */
+EVENT_GEOPHONE_CMD_BOLT_TSYNC_PERIOD, /* 0x35 | APP CMD: Set the new bolt tysnc period */
+EVENT_GEOPHONE_SD_FULL,             /* 0x36 | SD card is almost full */
 
-/* Label ------------------- | #No. | Description ----------------------------*/
+/* Label --------------------------- | #No. | Description ----------------------------*/
