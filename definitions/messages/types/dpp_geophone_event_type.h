@@ -103,8 +103,8 @@ EVENT_GEOPHONE_CMD_IMU_DATA_DEC,    /* 0x31 | APP CMD: set IMU Data Decimation. 
 
 EVENT_GEOPHONE_SCHED_CL_ERR,        /* 0x32 | Scheduler clear error */
 EVENT_GEOPHONE_SCHED_WR_ERR,        /* 0x33 | Add an entry to the scheduler error */
-EVENT_GEOPHONE_CMD_SYS_WAKEUP_TIME, /* 0x34 | APP CMD: set new Wakeup time. Remember to make an application reset afterwarts */
-EVENT_GEOPHONE_CMD_BOLT_TSYNC_PERIOD, /* 0x35 | APP CMD: Set the new bolt tysnc period */
+EVENT_GEOPHONE_CMD_SYS_WAKEUP_PERIOD, /* 0x34 | APP CMD: set new Wakeup time. Remember to make an application reset afterwards */
+EVENT_GEOPHONE_CMD_TSYNC_PERIOD,    /* 0x35 | APP CMD: Set the new Bolt tysnc period */
 EVENT_GEOPHONE_SD_FULL,             /* 0x36 | SD card is almost full */
 
 /* Label --------------------------- | #No. | Description ----------------------------*/
