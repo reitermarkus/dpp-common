@@ -69,9 +69,9 @@ CMD_GEOPHONE_IMU_FREQ_AA,       /* 0x12 | IMU Frequency Anti-Aliasing */    /* @
 CMD_GEOPHONE_IMU_OPMODE,        /* 0x13 | IMU Operation Mode */             /* @param 0: normal */
 CMD_GEOPHONE_IMU_TRG_LVL,       /* 0x14 | IMU Trigger Level */              /* @param 1: lowest setting */
 CMD_GEOPHONE_IMU_DATA_DEC,      /* 0x15 | IMU Data Decimation Factor */     /* @param 1: no decimation */
-CMD_GEOPHONE_SCHED_CLEAR,       /* 0x16 | Clear Scheduler, clear SD file */                                 /* @param none */
-CMD_GEOPHONE_SCHED_ADD,         /* 0x17 | Add new entry to Scheduler */                                     /* @param see below @Scheduler Add */
-CMD_GEOPHONE_SYS_WAKEUP_TIME,   /* 0x18 | Set Wakeup time, afterward Application reset should be done */    /* @param [0-30] s */
-CMD_GEOPHONE_BOLT_TSYNC_PERIOD, /* 0x19 | Set Tsync period time */                                          /* @param [0 - 65535] s */
+CMD_GEOPHONE_SCHED_CLEAR,       /* 0x16 | Clear Scheduler */                /* @param none */
+CMD_GEOPHONE_SCHED_ADD,         /* 0x17 | Add new entry to Scheduler */     /* @param start unix time stamp (32bit), period (20bit), duration (4bit), task mode (8bit) */
+CMD_GEOPHONE_SYS_WAKEUP_PERIOD, /* 0x18 | Set Wakeup period */              /* @param [0-30] s; requires application reset to take effect */
+CMD_GEOPHONE_TSYNC_PERIOD,      /* 0x19 | Set Tsync period time */          /* @param [0 - 65535] s */
 
 /* Label ----------------------- | #No. | Description ----------------------------*/
