@@ -98,6 +98,11 @@ typedef enum {
   DPP_MSG_TYPE_ADCDATA      = 38,   /* event acquistion (ADC) data */
   DPP_MSG_TYPE_INCLINO      = 39,   /* inclinometer data */
 
+  /* event-driven specific message types */
+  DPP_MSG_TYPE_STAG_WAKEUP  = 41,   /* Staggered Wakeup message */
+  DPP_MSG_TYPE_ACK_COMMAND  = 42,   /* Acknowledgment from the Base Station combined with a command to the sensor nodes */
+
+
   /* no types below this */
   DPP_MSG_TYPE_LASTID       = 127
 } dpp_message_type_t;
