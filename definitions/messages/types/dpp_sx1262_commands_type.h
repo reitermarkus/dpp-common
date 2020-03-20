@@ -56,5 +56,5 @@ CMD_EVENT_SX1262_LEADER_CONFS,          /* 0x04 | Change radio configurations fo
 CMD_EVENT_SX1262_STOP_MODE,             /* 0x05 | Change to stop mode 2 for given duration */                               /* @param: Duration after which the node should wake up, in ms */
 CMD_EVENT_SX1262_ADD_EVENT_CONF,        /* 0x06 | Add new event configuration */                                            /* @param: TBD */
 CMD_EVENT_SX1262_DEL_EVENT_CONF,        /* 0x07 | Delete event configuration */                                             /* @param: TBD */
-CMD_EVENT_SX1262_CHANGE_LEADER_ELECTION /* 0x08 | Change the leader election modi */                                        /* @param: leader_election_modi_t */
+CMD_EVENT_SX1262_CHANGE_LEADER_ELECTION,/* 0x08 | Change the leader election modi */                                        /* @param: leader_election_modi_t */
 /* Label -----------------------    | #No. | Description ----------------------------*/
