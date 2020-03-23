@@ -33,7 +33,7 @@
  */
 
 /*
- * command types specific to APP (application processor)
+ * command types specific to SX1262 (application processor)
  *
  *
  * typedef enum {
