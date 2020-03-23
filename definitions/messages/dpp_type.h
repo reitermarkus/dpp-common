@@ -60,6 +60,10 @@ typedef enum {
   DPP_COMMAND_DEVBOARD   = ((uint16_t)DPP_COMPONENT_ID_DEVBOARD << 8),
 #include "types/dpp_devboard_command_type.h"
 
+  DPP_COMMAND_SX1262       = ((uint16_t)DPP_COMPONENT_ID_SX1262 << 8),
+#include "types/dpp_sx1262_commands_type.h"
+
+
   DPP_COMMAND_LASTID = 0xffff
 } dpp_command_type_t;
 
@@ -81,6 +85,9 @@ typedef enum {
 
   DPP_EVENT_DEVBOARD     = ((uint16_t)DPP_COMPONENT_ID_DEVBOARD << 8),
 #include "types/dpp_devboard_event_type.h"
+
+  DPP_EVENT_SX1262       = ((uint16_t)DPP_COMPONENT_ID_SX1262 << 8),
+#include "types/dpp_sx1262_event_type.h"
   
   DPP_EVENT_LASTID       = 0xffff
 } dpp_event_type_t;
