@@ -32,7 +32,7 @@
  */
 
 /* 
- * event types specific to the BOLT bridge (msp432 app processor)
+ * event types specific to SX1262
  */
 
 /* Label ----------------------- | #No. | Description ---------------------- | Value ---*/
