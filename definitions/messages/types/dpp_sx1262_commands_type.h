@@ -49,12 +49,12 @@
 /* Label -----------------------    | #No. | Description ----------------------------*/
 
 /* Event-driven approach events */
-CMD_EVENT_SX1262_STAG_CONFS,            /* 0x01 | Change radio configurations for staggered wakeup */                       /* @param: arg32[0]: LoRa/FSK (1 bit), Spreading Factor (15 bits), Bandwidth (16 bits); arg32[1]: Code Rate (8 bits), Tx Power (8 bits), Preamble (16 bits) */
-CMD_EVENT_SX1262_STAG_RX_MODE,          /* 0x02 | Change staggerd wakeup mode */                                            /* @param: ALWAYS_RX = 0, LORA_CAD = 1, LORA_DUTY_CYCLE_CAD_STOPMODE = 2 */
-CMD_EVENT_SX1262_BS_CONFS,              /* 0x03 | Change radio configurations for sending to base station*/                 /* @param: arg32[0]: LoRa/FSK (1 bit), Spreading Factor (15 bits), Bandwidth (16 bits); arg32[1]: Code Rate (8 bits), Tx Power (8 bits), Preamble (16 bits) */
-CMD_EVENT_SX1262_LEADER_CONFS,          /* 0x04 | Change radio configurations for leader election and data aggregation */   /* @param: arg32[0]: LoRa/FSK (1 bit), Spreading Factor (15 bits), Bandwidth (16 bits); arg32[1]: Code Rate (8 bits), Tx Power (8 bits), Preamble (16 bits) */
-CMD_EVENT_SX1262_STOP_MODE,             /* 0x05 | Change to stop mode 2 for given duration */                               /* @param: Duration after which the node should wake up, in ms */
-CMD_EVENT_SX1262_ADD_EVENT_CONF,        /* 0x06 | Add new event configuration */                                            /* @param: TBD */
-CMD_EVENT_SX1262_DEL_EVENT_CONF,        /* 0x07 | Delete event configuration */                                             /* @param: TBD */
-CMD_EVENT_SX1262_CHANGE_LEADER_ELECTION,/* 0x08 | Change the leader election modi */                                        /* @param: leader_election_modi_t */
+CMD_SX1262_CONF_WKUP,              /* 0x01 | Change radio configurations for staggered wakeup */                       /* @param: arg32[0]: LoRa/FSK (1 bit), Spreading Factor (15 bits), Bandwidth (16 bits); arg32[1]: Code Rate (8 bits), Tx Power (8 bits), Preamble (16 bits) */
+CMD_SX1262_STAG_RX_MODE,           /* 0x02 | Change staggered wakeup mode */                                           /* @param: ALWAYS_RX = 0, LORA_CAD = 1, LORA_DUTY_CYCLE_CAD_STOPMODE = 2 */
+CMD_SX1262_CONF_BS,                /* 0x03 | Change radio configurations for sending to base station*/                 /* @param: arg32[0]: LoRa/FSK (1 bit), Spreading Factor (15 bits), Bandwidth (16 bits); arg32[1]: Code Rate (8 bits), Tx Power (8 bits), Preamble (16 bits) */
+CMD_SX1262_CONF_ELECTION,          /* 0x04 | Change radio configurations for leader election and data aggregation */   /* @param: arg32[0]: LoRa/FSK (1 bit), Spreading Factor (15 bits), Bandwidth (16 bits); arg32[1]: Code Rate (8 bits), Tx Power (8 bits), Preamble (16 bits) */
+CMD_SX1262_ELECTION_MODUS,         /* 0x05 | Change the leader election modus */                                       /* @param: leader_election_modi_t */
+CMD_SX1262_STOP_MODE,              /* 0x06 | Change to stop mode 2 for given duration */                               /* @param: Duration after which the node should wake up, in ms */
+CMD_SX1262_CONF_EVENT_ADD,         /* 0x07 | Add new event configuration */                                            /* @param: TBD */
+CMD_SX1262_CONF_EVENT_DEL,         /* 0x08 | Delete event configuration */                                             /* @param: TBD */
 /* Label -----------------------    | #No. | Description ----------------------------*/
