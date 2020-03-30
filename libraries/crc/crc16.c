@@ -35,8 +35,7 @@
 
 /*---------------------------------------------------------------------------*/
 /* CRC-16-IBM, CRC-16-ANSI */
-uint16_t
-crc16(const uint8_t* data, uint8_t num_bytes, uint16_t init_value)
+uint16_t crc16(const uint8_t* data, uint8_t num_bytes, uint16_t init_value)
 {
   uint16_t crc = init_value;
   while(num_bytes) {
