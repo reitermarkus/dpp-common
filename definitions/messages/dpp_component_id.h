@@ -49,9 +49,11 @@ enum {
   DPP_COMPONENT_ID_INVALID    = 0,
   DPP_COMPONENT_ID_CC430      = 1,  /* ComBoard with the CC430 */
   DPP_COMPONENT_ID_WGPS2      = 2,  /* Wireless GPS 2 */
-  DPP_COMPONENT_ID_GEOPHONE   = 3,  /* Geophone */
+  DPP_COMPONENT_ID_GEOPHONE   = 3,  /* Geophone 1x */
   DPP_COMPONENT_ID_DEVBOARD   = 4,  /* DevBoard MSP432 application processor */
   DPP_COMPONENT_ID_SX1262     = 5,  /* ComBoard with Semtech SX1262 */
+  DPP_COMPONENT_ID_GEO3X      = 6,  /* Geophone 3x */
+  DPP_COMPONENT_ID_GEOMINI    = 7,  /* Geophone mini */
 
   DPP_COMPONENT_ID_LASTID     = 0xff
 };
