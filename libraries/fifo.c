@@ -1,5 +1,5 @@
 /*
- * fifo.c
+ * fifo.c (32-bit version)
  * a simple and lightweight ring buffer / FIFO queue
  *
  *  Created on: Apr 23, 2020
@@ -9,28 +9,8 @@
 #include "dpp_lib.h"
 
 
-#define FIFO_GET_ELEM_BY_INDEX(idx)   (void*)((uint32_t)fifo + sizeof(fifo_meta_t) + (idx * ((fifo_meta_t*)fifo)->elem_size))
+#define FIFO_GET_ELEM_BY_INDEX(idx)   (void*)((uint32_t)((fifo_meta_t*)fifo)->buffer_addr + (idx * ((fifo_meta_t*)fifo)->elem_size))
 
-/*---------------------------------------------------------------------------*/
-#if !FIFO_STATIC_ALLOC
-fifo_t fifo_create(uint32_t elem_size, uint32_t num_elem)
-{
-  if (num_elem == 0 || num_elem == 0) {
-    return NULL;
-  }
-  fifo_t fifo = malloc(elem_size * num_elem + sizeof(fifo_meta_t));
-  if (!fifo) {
-    return NULL;
-  }
-  fifo_meta_t* f = (fifo_meta_t*)fifo;
-  f->write_idx = 0;
-  f->read_idx = 0;
-  f->elem_size = elem_size;
-  f->num_elem = num_elem;
-
-  return fifo;
-}
-#endif /* FIFO_STATIC_ALLOC */
 /*---------------------------------------------------------------------------*/
 void fifo_clear(fifo_t fifo)
 {
@@ -104,7 +84,7 @@ bool fifo_pop(fifo_t fifo, void* elem)
   return true;
 }
 /*---------------------------------------------------------------------------*/
-const void* const fifo_peek(const fifo_t fifo)
+const void* fifo_peek(const fifo_t fifo)
 {
   if (fifo && !fifo_is_empty(fifo)) {
     return FIFO_GET_ELEM_BY_INDEX(((fifo_meta_t*)fifo)->read_idx);
