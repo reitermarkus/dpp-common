@@ -57,4 +57,21 @@ CMD_SX1262_ELECTION_MODUS,         /* 0x05 | Change the leader election modus */
 CMD_SX1262_STOP_MODE,              /* 0x06 | Change to stop mode 2 for given duration */                               /* @param: Duration after which the node should wake up, in ms */
 CMD_SX1262_CONF_EVENT_ADD,         /* 0x07 | Add new event configuration */                                            /* @param: TBD */
 CMD_SX1262_CONF_EVENT_DEL,         /* 0x08 | Delete event configuration */                                             /* @param: TBD */
+
+CMD_SX1262_RESERVED9,
+CMD_SX1262_RESERVED10,
+CMD_SX1262_RESERVED11,
+CMD_SX1262_RESERVED12,
+CMD_SX1262_RESERVED13,
+CMD_SX1262_RESERVED14,
+CMD_SX1262_RESERVED15,
+CMD_SX1262_RESERVED16,
+CMD_SX1262_RESERVED17,
+CMD_SX1262_RESERVED18,
+CMD_SX1262_RESERVED19,
+
+/* Baseboard commands */
+CMD_SX1262_BASEBOARD_ENABLE,       /* 20 | Schedule baseboard enable */           /* @param: enable time (32-bit timestamp), time flag (0 = absolute time as UNIX timestamp, 1 = relative time in seconds), wakeup command for baseboard (1 byte)  */
+CMD_SX1262_BASEBOARD_DISABLE,      /* 21 | Schedule baseboard disable */          /* @param: disable time (32-bit timestamp), time flag (0 = absolute time as UNIX timestamp, 1 = relative time in seconds), wakeup command for baseboard (1 byte) */
+
 /* Label -----------------------    | #No. | Description ----------------------------*/
