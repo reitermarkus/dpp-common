@@ -86,6 +86,8 @@ uint32_t memb_get_free_block_count(memb_t memb);
 
 void     list_init(list_t list);
 bool     list_insert(list_t list, uint32_t key, const void* data);
+bool     list_remove(list_t list, const void* elem);
+bool     list_remove_by_key(list_t list, uint32_t key);
 bool     list_remove_head(list_t list, void* data);
 const void* list_get_head(const list_t list);
 uint32_t list_get_head_key(const list_t list);

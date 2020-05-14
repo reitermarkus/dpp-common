@@ -63,6 +63,70 @@ bool list_insert(list_t list, uint32_t key, const void* data)
   return false;
 }
 /*---------------------------------------------------------------------------*/
+bool list_remove(list_t list, const void* elem)
+{
+  if (!list || !elem) {
+    return false;
+  }
+  list_meta_t* l    = (list_meta_t*)list;
+  list_elem_t* curr = l->head;
+  list_elem_t* prev = NULL;
+  while (curr) {
+    if (curr == elem) {
+      /* adjust link */
+      if (prev) {
+        prev->next = curr->next;
+      } else {
+        /* it's the head */
+        l->head = curr->next;
+      }
+      /* free the memory block */
+      if (!memb_release_block(l->list_mem, curr)) {
+        return false;
+      }
+      return true;
+    }
+    prev = curr;
+    curr = curr->next;
+  }
+  return false;
+}
+/*---------------------------------------------------------------------------*/
+/* will remove all elements with a given key (can be multiple) */
+bool list_remove_by_key(list_t list, uint32_t key)
+{
+  if (!list) {
+    return false;
+  }
+  list_meta_t* l    = (list_meta_t*)list;
+  list_elem_t* curr = l->head;
+  list_elem_t* prev = NULL;
+  bool elem_found   = false;
+  /* elements are sorted with their keys in ascending order */
+  while (curr && curr->key <= key) {
+    if (curr->key == key) {
+      /* adjust link */
+      if (prev) {
+        prev->next = curr->next;
+      } else {
+        /* it's the head */
+        l->head = curr->next;
+      }
+      /* free the memory block */
+      if (!memb_release_block(l->list_mem, curr)) {
+        return false;
+      }
+      elem_found = true;
+      /* note: memb_release_block will not erase the memory, so the pointer is still valid at this point */
+      curr = curr->next;
+      continue;
+    }
+    prev = curr;
+    curr = curr->next;
+  }
+  return elem_found;
+}
+/*---------------------------------------------------------------------------*/
 bool list_remove_head(list_t list, void* data)
 {
   if (!list) {
@@ -79,6 +143,7 @@ bool list_remove_head(list_t list, void* data)
     if (!memb_release_block(l->list_mem, l->head)) {
       return false;
     }
+    /* note: memb_release_block will not erase the memory, so the pointer is still valid at this point */
     l->head = l->head->next;
     return true;
   }
