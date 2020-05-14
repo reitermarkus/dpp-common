@@ -45,6 +45,18 @@ CMD_BASEBOARD_SUSPEND,            /* 0x02 | suspend system */                  /
 CMD_BASEBOARD_WAKEUP_MODE,        /* 0x03 | wakeup mode */                     /* @param wakup mode */
 CMD_BASEBOARD_MSG_ROUTING,        /* 0x04 | DPP message routing */             /* @param 0: to GSN, 1: to LWB network, 2: both (to GSN and LWB network) */
 
+CMD_BASEBOARD_RESERVED_05,
+CMD_BASEBOARD_RESERVED_06,
+CMD_BASEBOARD_RESERVED_07,
+CMD_BASEBOARD_RESERVED_08,
+CMD_BASEBOARD_RESERVED_09,
+CMD_BASEBOARD_RESERVED_0A,
+CMD_BASEBOARD_RESERVED_0B,
+CMD_BASEBOARD_RESERVED_0C,
+CMD_BASEBOARD_RESERVED_0D,
+CMD_BASEBOARD_RESERVED_0E,
+CMD_BASEBOARD_RESERVED_0F,
+
 /* power commands */
 CMD_BASEBOARD_PWR_WLAN,           /* 0x10 | wlan en/disable */                 /* @param 0: off, 1: on */
 CMD_BASEBOARD_PWR_EXT1,           /* 0x11 | ext1 port en/disable */            /* @param 0: off, 1: on */
