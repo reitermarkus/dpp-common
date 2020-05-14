@@ -60,9 +60,17 @@ typedef enum {
   DPP_COMMAND_DEVBOARD   = ((uint16_t)DPP_COMPONENT_ID_DEVBOARD << 8),
 #include "types/dpp_devboard_command_type.h"
 
-  DPP_COMMAND_SX1262       = ((uint16_t)DPP_COMPONENT_ID_SX1262 << 8),
-#include "types/dpp_sx1262_commands_type.h"
+  DPP_COMMAND_SX1262     = ((uint16_t)DPP_COMPONENT_ID_SX1262 << 8),
+#include "types/dpp_sx1262_command_type.h"
 
+  DPP_COMMAND_GEO3X      = ((uint16_t)DPP_COMPONENT_ID_GEO3X << 8),
+//#include "types/dpp_geo3x_command_type.h"
+
+  DPP_COMMAND_GEOMINI    = ((uint16_t)DPP_COMPONENT_ID_GEOMINI << 8),
+//#include "types/dpp_geomini_command_type.h"
+
+  DPP_COMMAND_BASEBOARD  = ((uint16_t)DPP_COMPONENT_ID_BASEBOARD << 8),
+#include "types/dpp_baseboard_command_type.h"
 
   DPP_COMMAND_LASTID = 0xffff
 } dpp_command_type_t;
@@ -88,6 +96,15 @@ typedef enum {
 
   DPP_EVENT_SX1262       = ((uint16_t)DPP_COMPONENT_ID_SX1262 << 8),
 #include "types/dpp_sx1262_event_type.h"
+
+  DPP_EVENT_GEO3X        = ((uint16_t)DPP_COMPONENT_ID_GEO3X << 8),
+//#include "types/dpp_geo3x_event_type.h"
+
+  DPP_EVENT_GEOMINI      = ((uint16_t)DPP_COMPONENT_ID_GEOMINI << 8),
+//#include "types/dpp_geomini_event_type.h"
+
+  DPP_EVENT_BASEBOARD    = ((uint16_t)DPP_COMPONENT_ID_BASEBOARD << 8),
+#include "types/dpp_baseboard_event_type.h"
   
   DPP_EVENT_LASTID       = 0xffff
 } dpp_event_type_t;

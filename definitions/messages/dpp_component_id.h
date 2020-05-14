@@ -54,6 +54,7 @@ enum {
   DPP_COMPONENT_ID_SX1262     = 5,  /* ComBoard with Semtech SX1262 */
   DPP_COMPONENT_ID_GEO3X      = 6,  /* Geophone 3x */
   DPP_COMPONENT_ID_GEOMINI    = 7,  /* Geophone mini */
+  DPP_COMPONENT_ID_BASEBOARD  = 8,  /* Baseboard */
 
   DPP_COMPONENT_ID_LASTID     = 0xff
 };

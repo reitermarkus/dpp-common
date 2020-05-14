@@ -71,7 +71,7 @@ CMD_SX1262_RESERVED18,
 CMD_SX1262_RESERVED19,
 
 /* Baseboard commands */
-CMD_SX1262_BASEBOARD_ENABLE,       /* 20 | Schedule baseboard enable */           /* @param: enable time (32-bit timestamp), time flag (0 = absolute time as UNIX timestamp, 1 = relative time in seconds), wakeup command for baseboard (1 byte)  */
-CMD_SX1262_BASEBOARD_DISABLE,      /* 21 | Schedule baseboard disable */          /* @param: disable time (32-bit timestamp), time flag (0 = absolute time as UNIX timestamp, 1 = relative time in seconds), wakeup command for baseboard (1 byte) */
+CMD_SX1262_BASEBOARD_ENABLE,       /* 0x14 | Schedule baseboard enable */           /* @param: enable time (32-bit timestamp), time flag (0 = absolute time as UNIX timestamp, 1 = relative time in seconds), wakeup command for baseboard (1 byte)  */
+CMD_SX1262_BASEBOARD_DISABLE,      /* 0x15 | Schedule baseboard disable */          /* @param: disable time (32-bit timestamp), time flag (0 = absolute time as UNIX timestamp, 1 = relative time in seconds), wakeup command for baseboard (1 byte) */
 
 /* Label -----------------------    | #No. | Description ----------------------------*/
