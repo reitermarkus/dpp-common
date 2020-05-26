@@ -68,7 +68,8 @@ CMD_SX1262_RESERVED15,
 CMD_SX1262_RESERVED16,
 CMD_SX1262_RESERVED17,
 CMD_SX1262_RESERVED18,
-CMD_SX1262_RESERVED19,
+
+CMD_SX1262_RESET,                     /* 0x13 | perform a software reset */
 
 /* Baseboard commands */
 CMD_SX1262_BASEBOARD_ENABLE,          /* 0x14 | Schedule baseboard enable */           /* @param: enable time (32-bit timestamp), time flag (0 = absolute time as UNIX timestamp, 1 = relative time in seconds), wakeup command for baseboard (2 bytes)  */

@@ -36,3 +36,13 @@
  */
 
 /* Label ----------------------- | #No. | Description ---------------------- | Value ---*/
+
+EVENT_SX1262_CMD_EXECUTED,      /* 0x01 | command executed (ACK)             | cmd type */
+EVENT_SX1262_TIME_UPDATED,      /* 0x02 | local time has been adjusted       | delta (jump in us) */
+EVENT_SX1262_QUEUE_FULL,        /* 0x03 | queue full, message dropped        | queue ID */
+EVENT_SX1262_INV_MSG,           /* 0x04 | invalid message received           | error code */
+EVENT_SX1262_INV_CMD,           /* 0x05 | invalid command received           | cmd type and value */
+EVENT_SX1262_MSG_IGNORED,       /* 0x06 | unknown message type, ignored      | msg type */
+EVENT_SX1262_RADIO_ERROR,       /* 0x07 | radio error                        | error code */
+EVENT_SX1262_BOLT_ERROR,        /* 0x08 | bolt communication error           | error code */
+
