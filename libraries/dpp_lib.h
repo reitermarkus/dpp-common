@@ -14,6 +14,8 @@
 #include <stdbool.h>
 #include <string.h>
 
+#include "bolt/bolt.h"
+
 
 /* --- config --- */
 
@@ -24,16 +26,16 @@
 /* statically allocate memory blocks on the heap */
 #define MEMB_CREATE(memb_name, block_size, num_blocks)      static uint8_t memb_name##_memb[((num_blocks + 31) / 32) + block_size * num_blocks] = { 0 }; \
                                                             static memb_meta_t memb_name##_memb_info = { block_size, num_blocks, (uint32_t*)memb_name##_memb, (void*)((uint32_t)memb_name##_memb + ((num_blocks + 31) / 32)) }; \
-                                                            static memb_t memb_name = &memb_name##_memb_info
+                                                            memb_t memb_name = &memb_name##_memb_info
 
 #define LIST_CREATE(list_name, element_size, num_elements)  static uint8_t list_name##_memb[((num_elements + 31) / 32) + (sizeof(list_elem_t) + element_size) * num_elements] = { 0 }; \
                                                             static memb_meta_t list_name##_memb_info = { (sizeof(list_elem_t) + element_size), num_elements, (uint32_t*)list_name##_memb, (void*)((uint32_t)list_name##_memb + ((num_elements + 31) / 32)) }; \
                                                             static list_meta_t list_name##_list = { 0, &list_name##_memb_info }; \
-                                                            static list_t list_name = &list_name##_list
+                                                            list_t list_name = &list_name##_list
 
 #define FIFO_CREATE(fifo_name, element_size, num_elements)  static uint8_t fifo_name##_fifo_buffer[element_size * num_elements] = { 0 }; \
                                                             static fifo_meta_t fifo_name##_fifo_info = { 0, 0, element_size, num_elements, fifo_name##_fifo_buffer }; \
-                                                            static fifo_t fifo_name = &fifo_name##_fifo_info
+                                                            fifo_t fifo_name = &fifo_name##_fifo_info
 
 
 /* --- typedefs --- */
