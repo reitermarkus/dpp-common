@@ -14,8 +14,6 @@
 #include <stdbool.h>
 #include <string.h>
 
-#include "bolt/bolt.h"
-
 
 /* --- config --- */
 
