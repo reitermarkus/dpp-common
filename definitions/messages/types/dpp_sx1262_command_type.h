@@ -46,28 +46,28 @@
  * add a comma after each define!
  */
 
-/* Label -----------------------    | #No. | Description ----------------------------*/
+/* Label ----------------------------- | #No. | Description ----------------------------*/
 
 /* Event-driven approach events */
-CMD_SX1262_CONF_WKUP,              /* 0x01 | Change radio configurations for staggered wakeup */                       /* @param: arg32[0]: LoRa/FSK (1 bit), Spreading Factor (15 bits), Bandwidth (16 bits); arg32[1]: Code Rate (8 bits), Tx Power (8 bits), Preamble (16 bits) */
-CMD_SX1262_STAG_RX_MODE,           /* 0x02 | Change staggered wakeup mode */                                           /* @param: ALWAYS_RX = 0, LORA_CAD = 1, LORA_DUTY_CYCLE_CAD_STOPMODE = 2 */
-CMD_SX1262_CONF_BS,                /* 0x03 | Change radio configurations for sending to base station*/                 /* @param: arg32[0]: LoRa/FSK (1 bit), Spreading Factor (15 bits), Bandwidth (16 bits); arg32[1]: Code Rate (8 bits), Tx Power (8 bits), Preamble (16 bits) */
-CMD_SX1262_CONF_ELECTION,          /* 0x04 | Change radio configurations for leader election and data aggregation */   /* @param: arg32[0]: LoRa/FSK (1 bit), Spreading Factor (15 bits), Bandwidth (16 bits); arg32[1]: Code Rate (8 bits), Tx Power (8 bits), Preamble (16 bits) */
-CMD_SX1262_ELECTION_MODUS,         /* 0x05 | Change the leader election modus */                                       /* @param: leader_election_modi_t */
-CMD_SX1262_STOP_MODE,              /* 0x06 | Change to stop mode 2 for given duration */                               /* @param: Duration after which the node should wake up, in ms */
-CMD_SX1262_CONF_EVENT_ADD,         /* 0x07 | Add new event configuration */                                            /* @param: TBD */
-CMD_SX1262_CONF_EVENT_DEL,         /* 0x08 | Delete event configuration */                                             /* @param: TBD */
+CMD_SX1262_CONF_WKUP,                 /* 0x01 | Change radio configurations for staggered wakeup */                       /* @param: arg32[0]: LoRa/FSK (1 bit), Spreading Factor (15 bits), Bandwidth (16 bits); arg32[1]: Code Rate (8 bits), Tx Power (8 bits), Preamble (16 bits) */
+CMD_SX1262_STAG_RX_MODE,              /* 0x02 | Change staggered wakeup mode */                                           /* @param: ALWAYS_RX = 0, LORA_CAD = 1, LORA_DUTY_CYCLE_CAD_STOPMODE = 2 */
+CMD_SX1262_CONF_BS,                   /* 0x03 | Change radio configurations for sending to base station*/                 /* @param: arg32[0]: LoRa/FSK (1 bit), Spreading Factor (15 bits), Bandwidth (16 bits); arg32[1]: Code Rate (8 bits), Tx Power (8 bits), Preamble (16 bits) */
+CMD_SX1262_CONF_ELECTION,             /* 0x04 | Change radio configurations for leader election and data aggregation */   /* @param: arg32[0]: LoRa/FSK (1 bit), Spreading Factor (15 bits), Bandwidth (16 bits); arg32[1]: Code Rate (8 bits), Tx Power (8 bits), Preamble (16 bits) */
+CMD_SX1262_ELECTION_MODUS,            /* 0x05 | Change the leader election modus */                                       /* @param: leader_election_modi_t */
+CMD_SX1262_STOP_MODE,                 /* 0x06 | Change to stop mode 2 for given duration */                               /* @param: Duration after which the node should wake up, in ms */
+CMD_SX1262_CONF_EVENT_ADD,            /* 0x07 | Add new event configuration */                                            /* @param: TBD */
+CMD_SX1262_CONF_EVENT_DEL,            /* 0x08 | Delete event configuration */                                             /* @param: TBD */
 
-CMD_SX1262_RESERVED9,
-CMD_SX1262_RESERVED10,
-CMD_SX1262_RESERVED11,
-CMD_SX1262_RESERVED12,
-CMD_SX1262_RESERVED13,
-CMD_SX1262_RESERVED14,
-CMD_SX1262_RESERVED15,
-CMD_SX1262_RESERVED16,
-CMD_SX1262_RESERVED17,
-CMD_SX1262_RESERVED18,
+CMD_SX1262_RESERVED_09,
+CMD_SX1262_RESERVED_0A,
+CMD_SX1262_RESERVED_0B,
+CMD_SX1262_RESERVED_0C,
+CMD_SX1262_RESERVED_0D,
+CMD_SX1262_RESERVED_0E,
+CMD_SX1262_RESERVED_0F,
+CMD_SX1262_RESERVED_10,
+CMD_SX1262_RESERVED_11,
+CMD_SX1262_RESERVED_12,
 
 CMD_SX1262_RESET,                     /* 0x13 | perform a software reset */
 
@@ -75,5 +75,30 @@ CMD_SX1262_RESET,                     /* 0x13 | perform a software reset */
 CMD_SX1262_BASEBOARD_ENABLE,          /* 0x14 | Schedule baseboard enable */           /* @param: enable time (32-bit timestamp), time flag (0 = absolute time as UNIX timestamp, 1 = relative time in seconds), wakeup command for baseboard (2 bytes)  */
 CMD_SX1262_BASEBOARD_DISABLE,         /* 0x15 | Schedule baseboard disable */          /* @param: disable time (32-bit timestamp), time flag (0 = absolute time as UNIX timestamp, 1 = relative time in seconds) */
 CMD_SX1262_BASEBOARD_ENABLE_PERIODIC, /* 0x16 | Schedule periodic baseboard enable */  /* @param: enable time hour [0..23] (1 byte), enable time minute [0..59] (1 byte), period in minutes (2 bytes, set to 0 to disable), wakeup command for baseboard (2 bytes)  */
+CMD_SX1262_RESERVED_17,
+CMD_SX1262_RESERVED_18,
+CMD_SX1262_RESERVED_19,
 
-/* Label -----------------------    | #No. | Description ----------------------------*/
+/* eLWB / network / data collection commands */
+CMD_SX1262_SET_COM_PERIOD,            /* 0x20 | Set the communication base period (only on the host node) */               /* @param: period in seconds (16-bit) */
+CMD_SX1262_SET_HEALTH_PERIOD,         /* 0x21 | Set the periodicity of the node health messages */                         /* @param: period in seconds (16-bit) */
+CMD_SX1262_SET_EVENT_LEVEL,           /* 0x22 | Set event message level */                                                 /* @param: level of type event_msg_level_t (1 byte) */
+CMD_SX1262_REGISTER_NODE,             /* 0x23 | Register a node in the network (only a host node accepts this command) */  /* @param: node ID to register */
+CMD_SX1262_RESERVED_24,
+CMD_SX1262_RESERVED_25,
+CMD_SX1262_RESERVED_26,
+CMD_SX1262_RESERVED_27,
+CMD_SX1262_RESERVED_28,
+CMD_SX1262_RESERVED_29,
+CMD_SX1262_RESERVED_2A,
+CMD_SX1262_RESERVED_2B,
+CMD_SX1262_RESERVED_2C,
+CMD_SX1262_RESERVED_2D,
+CMD_SX1262_RESERVED_2E,
+CMD_SX1262_RESERVED_2F,
+
+/* radio commands */
+CMD_SX1262_SET_TX_POWER,              /* 0x30 | Set the radio transmit power */   /* @param: TX power in dBm (1 byte, signed) */
+CMD_SX1262_SET_MODULATION,            /* 0x31 | Set the radio modulation */       /* @param: modulation table index according to radio_constants.c (1 byte) */
+
+/* Label ----------------------------- | #No. | Description ----------------------------*/
