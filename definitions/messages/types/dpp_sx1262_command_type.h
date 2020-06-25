@@ -75,7 +75,7 @@ CMD_SX1262_RESET,                     /* 0x13 | perform a software reset */
 CMD_SX1262_BASEBOARD_ENABLE,          /* 0x14 | Schedule baseboard enable */           /* @param: enable time (32-bit timestamp), time flag (0 = absolute time as UNIX timestamp, 1 = relative time in seconds), wakeup command for baseboard (2 bytes)  */
 CMD_SX1262_BASEBOARD_DISABLE,         /* 0x15 | Schedule baseboard disable */          /* @param: disable time (32-bit timestamp), time flag (0 = absolute time as UNIX timestamp, 1 = relative time in seconds) */
 CMD_SX1262_BASEBOARD_ENABLE_PERIODIC, /* 0x16 | Schedule periodic baseboard enable */  /* @param: enable time hour [0..23] (1 byte), enable time minute [0..59] (1 byte), period in minutes (2 bytes, set to 0 to disable), wakeup command for baseboard (2 bytes)  */
-CMD_SX1262_RESERVED_17,
+CMD_SX1262_BASEBOARD_POWER_EXT3,      /* 0x17 | Enable or disable the power on port EXT3 */  /* @param: 1 byte (0 = disable, 1 = enable) */
 CMD_SX1262_RESERVED_18,
 CMD_SX1262_RESERVED_19,
 CMD_SX1262_RESERVED_1A,
