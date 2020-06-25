@@ -78,6 +78,12 @@ CMD_SX1262_BASEBOARD_ENABLE_PERIODIC, /* 0x16 | Schedule periodic baseboard enab
 CMD_SX1262_RESERVED_17,
 CMD_SX1262_RESERVED_18,
 CMD_SX1262_RESERVED_19,
+CMD_SX1262_RESERVED_1A,
+CMD_SX1262_RESERVED_1B,
+CMD_SX1262_RESERVED_1C,
+CMD_SX1262_RESERVED_1D,
+CMD_SX1262_RESERVED_1E,
+CMD_SX1262_RESERVED_1F,
 
 /* eLWB / network / data collection commands */
 CMD_SX1262_SET_COM_PERIOD,            /* 0x20 | Set the communication base period (only on the host node) */               /* @param: period in seconds (16-bit) */
