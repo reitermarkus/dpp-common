@@ -45,4 +45,5 @@ EVENT_SX1262_INV_CMD,           /* 0x05 | invalid command received           | c
 EVENT_SX1262_MSG_IGNORED,       /* 0x06 | unknown message type, ignored      | msg type */
 EVENT_SX1262_RADIO_ERROR,       /* 0x07 | radio error                        | error code */
 EVENT_SX1262_BOLT_ERROR,        /* 0x08 | bolt communication error           | error code */
+EVENT_SX1262_STACK_WM,          /* 0x09 | stack watermark notification       | watermark + task ID */
 
