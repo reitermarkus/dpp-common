@@ -62,7 +62,7 @@
 #define DPP_MSG_MIN_PAYLOAD_LEN   \
     (DPP_MSG_MIN_PKT_LEN - DPP_MSG_MIN_HDR_LEN - 2)
 #define DPP_MSG_MIN_LEN(msg)      \
-    ((msg).header.payload_len + DPP_MSG_MIN_HDR_LEN + 2)
+    ((msg)->header.payload_len + DPP_MSG_MIN_HDR_LEN + 2)
 
 
 /* special (reserved) device IDs */
@@ -228,7 +228,22 @@ typedef struct {
     uint8_t             payload_len;     /* payload length [bytes] */
   } header;
   union {
+    dpp_com_health_t    com_health;
+    dpp_app_health_t    app_health;
+    dpp_command_t       cmd;
+    dpp_node_info_t     node_info;
+    dpp_event_t         evt;              /* do not rename to 'event', compiler usage in TinyOS */
+    dpp_imu_t           imu;
+    dpp_inclino_t       inclino;
+    dpp_gnss_sv_t       gnss_sv;
+    dpp_wgps_status_t   wgps_status;
+    dpp_timestamp_t     timestamp;
+    dpp_fw_t            firmware;
+    dpp_lwb_health_t    lwb_health;
+    dpp_geophone_acq_t  geo_acq;
+    dpp_geophone_adc_t  geo_adc;
     uint8_t             payload[DPP_MSG_MIN_PAYLOAD_LEN + 2];   /* raw bytes */
+    uint16_t            payload16[DPP_MSG_PAYLOAD_LEN / 2];     /* rounded down! */
   };
 } dpp_message_min_t;
 
