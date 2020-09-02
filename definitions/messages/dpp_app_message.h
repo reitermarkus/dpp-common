@@ -151,6 +151,17 @@ typedef struct {
 } dpp_geophone_acq_t;
 
 
+#define DPP_GEOPHONE_ACQ_MIN_LEN    14      /* bytes*/
+typedef struct {
+  uint16_t          node_id;                /* ID of the node which created this message */
+  uint16_t          event_id;               /* ID of the event / acquisition */
+  uint32_t          start_time;             /* Start time in seconds */
+  uint16_t          peak_val;               /* Peak value / amplitude (pos. or neg.) */
+  uint16_t          trg_count;              /* Count of triggers (pos. + neg.) */
+  uint16_t          duration;               /* Event duration in ms */
+} dpp_geophone_acq_min_t;
+
+
 #define DPP_GEOPHONE_ADC_LEN                   DPP_MSG_PAYLOAD_LEN
 #define DPP_GEOPHONE_ADC_HDR_LEN               9
 #define DPP_GEOPHONE_ADC_DFMT_BPS_MASK         0x03      /* 2 bits used for # adc bits per sample: 0 (native), 1 (8 bit), 2 (16), 3 (24) */
@@ -169,6 +180,7 @@ typedef struct {
   uint8_t           adc_data_fmt;           /* data format for the adc samples (see above) */
   uint8_t           adc_data[DPP_GEOPHONE_ADC_LEN - DPP_GEOPHONE_ADC_HDR_LEN];  /* use the remaining bytes of this packet to store the ADC samples */
 } dpp_geophone_adc_t;
+
 
 #pragma pack()
 

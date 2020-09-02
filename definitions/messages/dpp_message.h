@@ -101,7 +101,8 @@ typedef enum {
   /* event-driven specific message types */
   DPP_MSG_TYPE_STAG_WAKEUP  = 41,   /* Staggered Wakeup message */
   DPP_MSG_TYPE_ACK_COMMAND  = 42,   /* Acknowledgment from the Base Station combined with a command to the sensor nodes */
-
+  DPP_MSG_TYPE_HEALTH_AGGR  = 43,   /* Aggregated health message */
+  DPP_MSG_TYPE_AE_EVT_AGGR  = 44,   /* Aggregated acoustic emission event */
 
   /* no types below this */
   DPP_MSG_TYPE_LASTID       = 127
@@ -160,6 +161,15 @@ typedef struct {
     uint32_t          arg32[(DPP_MSG_PAYLOAD_LEN - 2) / 4];
   };
 } dpp_command_t;
+
+
+/* for general data aggregation (several 'blocks' of the same type of data sequentialized) */
+typedef struct {
+  uint16_t          id;
+  uint8_t           block_cnt;
+  uint8_t           block_size;
+  uint8_t           blocks[DPP_MSG_PAYLOAD_LEN - 4];
+} dpp_data_aggr_t;
 
 
 #define DPP_FW_HDR_LEN      4
@@ -241,7 +251,9 @@ typedef struct {
     dpp_fw_t            firmware;
     dpp_lwb_health_t    lwb_health;
     dpp_geophone_acq_t  geo_acq;
+    dpp_geophone_acq_min_t  geo_acq_min;
     dpp_geophone_adc_t  geo_adc;
+    dpp_data_aggr_t     data_aggr;
     uint8_t             payload[DPP_MSG_MIN_PAYLOAD_LEN + 2];   /* raw bytes */
     uint16_t            payload16[DPP_MSG_PAYLOAD_LEN / 2];     /* rounded down! */
   };
