@@ -165,19 +165,25 @@ typedef struct {
 
 
 /* helper struct for dpp_ack_cmd_t */
-#define DPP_CMD_MIN_LEN     6
+#define DPP_CMD_MIN_LEN   6
 typedef struct {
-  uint16_t            target_id;      /* target node ID */
-  dpp_command_type_t  type;           /* command */
-  uint16_t            arg;            /* argument */
+  uint16_t                target_id;    /* target node ID */
+  union {
+    struct {
+      dpp_command_type_t  type;         /* command */
+      uint16_t            arg;          /* argument */
+    } cmd;
+    uint32_t              cmd32;
+  };
 } dpp_cmd_min_t;
 
-
 /* combined acknowledgement + commands */
+#define DPP_ACK_CMD_LEN(ack_cmd)  ((ack_cmd)->num_cmds * DPP_CMD_MIN_LEN + 4)
+#define DPP_ACK_MAX_CMDS          ((DPP_MSG_PAYLOAD_LEN - 4) / DPP_CMD_MIN_LEN)
 typedef struct {
   uint16_t            ack_seq_no;     /* sequence no. of the acknowledged packet */
   uint16_t            num_cmds;       /* number of node ID + command tuples (note: use 16 bits for better alignment) */
-  dpp_cmd_min_t       commands[(DPP_MSG_PAYLOAD_LEN - 4) / DPP_CMD_MIN_LEN];    /* list of commands */
+  dpp_cmd_min_t       commands[DPP_ACK_MAX_CMDS];    /* list of commands */
 } dpp_ack_cmd_t;
 
 
@@ -198,15 +204,25 @@ typedef struct {
 } dpp_health_min_t;
 
 
+/* helper structs for dpp_data_aggr_t to create tuples of node ID and some other struct */
+typedef struct {
+  uint16_t            node_id;
+  dpp_health_min_t    health_min;
+} dpp_data_aggr_health_min_t;
+
+typedef struct {
+  uint16_t                node_id;
+  dpp_geophone_acq_min_t  geo_acq_min;
+} dpp_data_aggr_geo_acq_min_t;
+
 /* for general data aggregation (several 'blocks' of the same type of data sequentialized) */
 #define DPP_DATA_AGGR_LEN(aggr)   (((aggr)->block_cnt * (aggr)->block_size) + 2)
 typedef struct {
-  uint8_t                   block_cnt;
-  uint8_t                   block_size;
+  uint8_t                       block_cnt;
+  uint8_t                       block_size;
   union {
-    uint8_t                 blocks[DPP_MSG_PAYLOAD_LEN - 2];
-    dpp_geophone_acq_min_t  geo_acq_min[(DPP_MSG_PAYLOAD_LEN - 2) / DPP_GEOPHONE_ACQ_MIN_LEN];
-    dpp_health_min_t        health_min[(DPP_MSG_PAYLOAD_LEN - 2) / DPP_HEALTH_MIN_LEN];
+    dpp_data_aggr_health_min_t  health_blocks[(DPP_MSG_PAYLOAD_LEN - 2) / (DPP_HEALTH_MIN_LEN + 2)];
+    dpp_data_aggr_geo_acq_min_t geo_acq_blocks[(DPP_MSG_PAYLOAD_LEN - 2) / (DPP_GEOPHONE_ACQ_MIN_LEN + 2)];
   };
 } dpp_data_aggr_t;
 
