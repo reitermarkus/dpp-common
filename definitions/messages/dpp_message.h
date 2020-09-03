@@ -79,6 +79,7 @@ typedef enum {
   DPP_MSG_TYPE_NODE_INFO    = 3,    /* node info (sent after a reset) */
   DPP_MSG_TYPE_CMD          = 4,    /* command message */
   DPP_MSG_TYPE_FW           = 5,    /* firmware update message */
+  DPP_MSG_TYPE_HEALTH_MIN   = 6,    /* minimal health message (APP + COM combined) */
 
   /* message types concerning the communication processor */
   DPP_MSG_TYPE_COM_RESPONSE = 10,   /* command response */
@@ -163,12 +164,49 @@ typedef struct {
 } dpp_command_t;
 
 
+/* helper struct for dpp_ack_cmd_t */
+#define DPP_CMD_MIN_LEN     6
+typedef struct {
+  uint16_t            target_id;      /* target node ID */
+  dpp_command_type_t  type;           /* command */
+  uint16_t            arg;            /* argument */
+} dpp_cmd_min_t;
+
+
+/* combined acknowledgement + commands */
+typedef struct {
+  uint16_t            ack_seq_no;     /* sequence no. of the acknowledged packet */
+  uint16_t            num_cmds;       /* number of node ID + command tuples (note: use 16 bits for better alignment) */
+  dpp_cmd_min_t       commands[(DPP_MSG_PAYLOAD_LEN - 4) / DPP_CMD_MIN_LEN];    /* list of commands */
+} dpp_ack_cmd_t;
+
+
+/* combined (APP + COM) minimal health message */
+#define DPP_HEALTH_MIN_LEN  16
+typedef struct {
+  uint16_t            uptime;         /* system uptime (either COM or APP) [h] */
+  uint16_t            cpu_dc_app;     /* CPU duty cycle (APP) [10^-2 %] */
+  uint16_t            cpu_dc_com;     /* CPU duty cycle (COM) [10^-2 %] */
+  uint8_t             supply_vcc;     /* system supply voltage [10^-1 V] */
+  uint8_t             mem_usage;      /* Non-volatile memory usage (typically SD card of APP) [%] */
+  uint8_t             stack_wm;       /* Stack watermark (max value of APP and COM) [%] */
+  uint8_t             radio_prr;      /* Average packet reception rate [%] */
+  int8_t              radio_rssi;     /* Average receive signal strength indicator [dBm] */
+  uint8_t             radio_hop_cnt;  /* Average hop count */
+  uint16_t            radio_rx_dc;    /* RX duty cycle (COM) [10^-2 %] */
+  uint16_t            radio_tx_dc;    /* TX duty cycle (COM) [10^-2 %] */
+} dpp_health_min_t;
+
+
 /* for general data aggregation (several 'blocks' of the same type of data sequentialized) */
 typedef struct {
-  uint16_t          id;
-  uint8_t           block_cnt;
-  uint8_t           block_size;
-  uint8_t           blocks[DPP_MSG_PAYLOAD_LEN - 4];
+  uint8_t                   block_cnt;
+  uint8_t                   block_size;
+  union {
+    uint8_t                 blocks[DPP_MSG_PAYLOAD_LEN - 2];
+    dpp_geophone_acq_min_t  geo_acq[(DPP_MSG_PAYLOAD_LEN - 2) / DPP_GEOPHONE_ACQ_MIN_LEN];
+    dpp_health_min_t        health_min[(DPP_MSG_PAYLOAD_LEN - 2) / DPP_HEALTH_MIN_LEN];
+  };
 } dpp_data_aggr_t;
 
 
@@ -212,6 +250,7 @@ typedef struct {
   union {
     dpp_com_health_t    com_health;
     dpp_app_health_t    app_health;
+    dpp_health_min_t    health_min;
     dpp_command_t       cmd;
     dpp_node_info_t     node_info;
     dpp_event_t         evt;              /* do not rename to 'event', compiler usage in TinyOS */
@@ -224,6 +263,8 @@ typedef struct {
     dpp_lwb_health_t    lwb_health;
     dpp_geophone_acq_t  geo_acq;
     dpp_geophone_adc_t  geo_adc;
+    dpp_data_aggr_t     data_aggr;
+    dpp_ack_cmd_t       ack_cmd;
     uint8_t             payload[DPP_MSG_PAYLOAD_LEN + 2];   /* raw bytes (add +2 to increase overall structure size to include the crc!) */
     uint16_t            payload16[DPP_MSG_PAYLOAD_LEN / 2]; /* rounded down! */
   };
@@ -240,6 +281,7 @@ typedef struct {
   union {
     dpp_com_health_t    com_health;
     dpp_app_health_t    app_health;
+    dpp_health_min_t    health_min;
     dpp_command_t       cmd;
     dpp_node_info_t     node_info;
     dpp_event_t         evt;              /* do not rename to 'event', compiler usage in TinyOS */
@@ -251,9 +293,9 @@ typedef struct {
     dpp_fw_t            firmware;
     dpp_lwb_health_t    lwb_health;
     dpp_geophone_acq_t  geo_acq;
-    dpp_geophone_acq_min_t  geo_acq_min;
     dpp_geophone_adc_t  geo_adc;
     dpp_data_aggr_t     data_aggr;
+    dpp_ack_cmd_t       ack_cmd;
     uint8_t             payload[DPP_MSG_MIN_PAYLOAD_LEN + 2];   /* raw bytes */
     uint16_t            payload16[DPP_MSG_PAYLOAD_LEN / 2];     /* rounded down! */
   };
