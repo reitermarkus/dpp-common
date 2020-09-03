@@ -199,12 +199,13 @@ typedef struct {
 
 
 /* for general data aggregation (several 'blocks' of the same type of data sequentialized) */
+#define DPP_DATA_AGGR_LEN(aggr)   (((aggr)->block_cnt * (aggr)->block_size) + 2)
 typedef struct {
   uint8_t                   block_cnt;
   uint8_t                   block_size;
   union {
     uint8_t                 blocks[DPP_MSG_PAYLOAD_LEN - 2];
-    dpp_geophone_acq_min_t  geo_acq[(DPP_MSG_PAYLOAD_LEN - 2) / DPP_GEOPHONE_ACQ_MIN_LEN];
+    dpp_geophone_acq_min_t  geo_acq_min[(DPP_MSG_PAYLOAD_LEN - 2) / DPP_GEOPHONE_ACQ_MIN_LEN];
     dpp_health_min_t        health_min[(DPP_MSG_PAYLOAD_LEN - 2) / DPP_HEALTH_MIN_LEN];
   };
 } dpp_data_aggr_t;

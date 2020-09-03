@@ -156,7 +156,7 @@ typedef struct {
   uint16_t          node_id;                /* ID of the node which created this message */
   uint16_t          event_id;               /* ID of the event / acquisition */
   uint32_t          start_time;             /* Start time in seconds */
-  uint16_t          peak_val;               /* Peak value / amplitude (pos. or neg.) */
+  uint16_t          amplitude;              /* Signal amplitude */
   uint16_t          trg_count;              /* Count of triggers (pos. + neg.) */
   uint16_t          duration;               /* Event duration in ms */
 } dpp_geophone_acq_min_t;
