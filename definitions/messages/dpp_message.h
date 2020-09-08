@@ -103,7 +103,7 @@ typedef enum {
   DPP_MSG_TYPE_STAG_WAKEUP  = 41,   /* Staggered Wakeup message */
   DPP_MSG_TYPE_ACK_COMMAND  = 42,   /* Acknowledgment from the Base Station combined with a command to the sensor nodes */
   DPP_MSG_TYPE_HEALTH_AGGR  = 43,   /* Aggregated health message */
-  DPP_MSG_TYPE_AE_EVT_AGGR  = 44,   /* Aggregated acoustic emission event */
+  DPP_MSG_TYPE_GEO_ACQ_AGGR = 44,   /* Aggregated geophone acquisition event */
 
   /* no types below this */
   DPP_MSG_TYPE_LASTID       = 127

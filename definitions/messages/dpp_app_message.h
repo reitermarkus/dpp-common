@@ -151,9 +151,8 @@ typedef struct {
 } dpp_geophone_acq_t;
 
 
-#define DPP_GEOPHONE_ACQ_MIN_LEN    14      /* bytes*/
+#define DPP_GEOPHONE_ACQ_MIN_LEN    12      /* bytes*/
 typedef struct {
-  uint16_t          node_id;                /* ID of the node which created this message */
   uint16_t          event_id;               /* ID of the event / acquisition */
   uint32_t          start_time;             /* Start time in seconds */
   uint16_t          amplitude;              /* Signal amplitude */
