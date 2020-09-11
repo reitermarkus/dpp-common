@@ -188,7 +188,7 @@ typedef struct {
 
 
 /* combined (APP + COM) minimal health message */
-#define DPP_HEALTH_MIN_LEN  16
+#define DPP_HEALTH_MIN_LEN  18
 typedef struct {
   uint16_t            uptime;         /* system uptime (either COM or APP) [h] */
   uint16_t            cpu_dc_app;     /* CPU duty cycle (APP) [10^-2 %] */
@@ -196,9 +196,11 @@ typedef struct {
   uint8_t             supply_vcc;     /* system supply voltage [10^-1 V] */
   uint8_t             mem_usage;      /* Non-volatile memory usage (typically SD card of APP) [%] */
   uint8_t             stack_wm;       /* Stack watermark (max value of APP and COM) [%] */
+  int8_t              temperature;    /* Ambient temperature [°C] */
+  uint8_t             humidity;       /* Ambient humidity [%] */
   uint8_t             radio_prr;      /* Average packet reception rate [%] */
   int8_t              radio_rssi;     /* Average receive signal strength indicator [dBm] */
-  uint8_t             radio_hop_cnt;  /* Average hop count */
+  uint8_t             radio_hop_cnt;  /* Average hop count on first reception [hops * 10] */
   uint16_t            radio_rx_dc;    /* RX duty cycle (COM) [10^-2 %] */
   uint16_t            radio_tx_dc;    /* TX duty cycle (COM) [10^-2 %] */
 } dpp_health_min_t;
