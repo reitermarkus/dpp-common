@@ -194,7 +194,7 @@ typedef struct {
   uint16_t            cpu_dc_app;     /* CPU duty cycle (APP) [10^-2 %] */
   uint16_t            cpu_dc_com;     /* CPU duty cycle (COM) [10^-2 %] */
   uint8_t             supply_vcc;     /* system supply voltage [10^-1 V] */
-  uint8_t             mem_usage;      /* Non-volatile memory usage (typically SD card of APP) [%] */
+  uint8_t             nv_mem;         /* Non-volatile memory usage (typically SD card of APP) [%] */
   uint8_t             stack_wm;       /* Stack watermark (max value of APP and COM) [%] */
   int8_t              temperature;    /* Ambient temperature [°C] */
   uint8_t             humidity;       /* Ambient humidity [%] */
