@@ -252,18 +252,22 @@ typedef struct {
 } dpp_fw_t;
 
 
+/* header of a DPP message */
+typedef struct {
+  uint16_t            device_id;        /* sender node ID */
+  dpp_message_type_t  type : 8;         /* force 1 byte */
+  uint8_t             payload_len;      /* payload length [bytes] */
+  uint16_t            target_id;        /* recipient device ID */
+  uint16_t            seqnr;            /* sequence number */
+  uint64_t            generation_time;  /* packet generation time (us) */
+} dpp_header_t;
+
+
 /* application layer packet format (a packet is called 'message') */
 /* crc is calculated over the whole structure and appended to the message */
 typedef struct {
   /* header: DPP_MSG_HDR_LEN bytes */
-  struct {
-    uint16_t            device_id;        /* sender node ID */
-    dpp_message_type_t  type : 8;         /* force 1 byte */
-    uint8_t             payload_len;      /* payload length [bytes] */
-    uint16_t            target_id;        /* recipient device ID */
-    uint16_t            seqnr;            /* sequence number */
-    uint64_t            generation_time;  /* packet generation time (us) */
-  } header;
+  dpp_header_t          header;
   /* none of the union members may be larger than DPP_MSG_PAYLOAD_LEN bytes
    * except for 'payload' */
   union {
