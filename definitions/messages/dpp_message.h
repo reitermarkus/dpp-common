@@ -57,7 +57,7 @@
 /* minimal message type with smaller header (set last bit of message type to
  * indicate an minimal message) */
 #define DPP_MSG_TYPE_MIN          0x80    /* mask (msb) */
-#define DPP_MSG_MIN_PKT_LEN       128     /* uint8_t (max. 255) */
+#define DPP_MSG_MIN_PKT_LEN       126     /* uint8_t (max. 255) */
 #define DPP_MSG_MIN_HDR_LEN       4
 #define DPP_MSG_MIN_PAYLOAD_LEN   \
     (DPP_MSG_MIN_PKT_LEN - DPP_MSG_MIN_HDR_LEN - 2)
@@ -320,7 +320,7 @@ typedef struct {
     dpp_data_aggr_t     data_aggr;
     dpp_ack_cmd_t       ack_cmd;
     uint8_t             payload[DPP_MSG_MIN_PAYLOAD_LEN + 2];   /* raw bytes */
-    uint16_t            payload16[DPP_MSG_PAYLOAD_LEN / 2];     /* rounded down! */
+    uint16_t            payload16[DPP_MSG_MIN_PAYLOAD_LEN / 2];
   };
 } dpp_message_min_t;
 
@@ -344,7 +344,6 @@ typedef struct {
  * E R R O R   C H E C K S
  */
 
-/* error checks (max. message length) */
 #if (DPP_MSG_PAYLOAD_LEN < DPP_MSG_COM_HEALTH_LEN) || \
     (DPP_MSG_PAYLOAD_LEN < DPP_MSG_NODE_INFO_LEN)
   #error "payload of message_t is too big"
@@ -359,6 +358,10 @@ typedef struct {
 #if DPP_FW_BLOCK_SIZE > (DPP_MSG_PAYLOAD_LEN - 2 - DPP_FW_HDR_LEN)
   #error "DPP_FW_BLOCK_SIZE is too big"
 #endif /* DPP_FW_BLOCK_SIZE */
+
+_Static_assert(sizeof(dpp_header_t) == DPP_MSG_HDR_LEN, "dpp_header_t is not DPP_MSG_HDR_LEN bytes in size!");
+_Static_assert(sizeof(dpp_message_t) == DPP_MSG_PKT_LEN, "dpp_message_t is not DPP_MSG_PKT_LEN bytes in size!");
+_Static_assert(sizeof(dpp_message_min_t) == DPP_MSG_PKT_LEN, "dpp_message_min_t is not DPP_MSG_PKT_LEN bytes in size!");
 
 
 #endif /* __DPP_MESSAGE_H__ */
