@@ -76,6 +76,7 @@ uint16_t crc16(const uint8_t* data, uint8_t num_bytes, uint16_t init_value);
 
 uint32_t hexstr_to_uint32(const char* str);
 uint32_t uint16_to_str(uint16_t val, char* out_buffer);
+uint32_t bytes_to_hexstr(const uint8_t* bytes, uint32_t num_bytes, char* out_buffer, uint32_t buffer_size);
 
 void     memb_init(memb_t memb);
 void*    memb_allocate_block(memb_t memb);

@@ -12,6 +12,9 @@
 /* convert an ASCII string of up to 8 hex characters to an unsigned int */
 uint32_t hexstr_to_uint32(const char* str)
 {
+  if (!str) {
+    return 0;
+  }
   uint32_t      res = 0;
   uint_fast8_t  cnt = 8;
   /* skip leading '0x' if present */
@@ -38,6 +41,9 @@ uint32_t hexstr_to_uint32(const char* str)
 /*---------------------------------------------------------------------------*/
 uint32_t uint16_to_str(uint16_t val, char* out_buffer)
 {
+  if (!out_buffer) {
+    return 0;
+  }
   uint32_t div = 10000;
   uint32_t num = 0;
   while (div) {
@@ -53,3 +59,31 @@ uint32_t uint16_to_str(uint16_t val, char* out_buffer)
   return num;                      /* return the # written characters */
 }
 /*---------------------------------------------------------------------------*/
+uint32_t bytes_to_hexstr(const uint8_t* bytes, uint32_t num_bytes, char* out_buffer, uint32_t buffer_size)
+{
+  if (!bytes || !num_bytes || !out_buffer || buffer_size < 3) {
+    return 0;
+  }
+  uint32_t len = 0;
+  buffer_size -= 3;
+  while (num_bytes && (len < buffer_size)) {
+    char upper_bits = ((*bytes) >> 4) + '0';
+    char lower_bits = ((*bytes) & 0x0f) + '0';
+    if (upper_bits > '9') {
+      upper_bits += ('A' - '9' - 1);
+    }
+    if (lower_bits > '9') {
+      lower_bits += ('A' - '9' - 1);
+    }
+    out_buffer[len++] = upper_bits;
+    out_buffer[len++] = lower_bits;
+    bytes++;
+    num_bytes--;
+  }
+  out_buffer[len++] = 0;
+
+  // return the number of written bytes
+  return len;
+}
+/*---------------------------------------------------------------------------*/
+
