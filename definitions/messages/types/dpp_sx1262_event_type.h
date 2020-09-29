@@ -46,4 +46,5 @@ EVENT_SX1262_MSG_IGNORED,       /* 0x06 | unknown message type, ignored      | m
 EVENT_SX1262_RADIO_ERROR,       /* 0x07 | radio error                        | error code */
 EVENT_SX1262_BOLT_ERROR,        /* 0x08 | bolt communication error           | error code */
 EVENT_SX1262_STACK_WM,          /* 0x09 | stack watermark notification       | watermark + task ID */
-
+EVENT_SX1262_HOST_ID_ERROR,     /* 0x0a | error related to the host ID       | error code */
+EVENT_SX1262_SCHED_MISSED,      /* 0x0b | schedule packet missed             | error code */
