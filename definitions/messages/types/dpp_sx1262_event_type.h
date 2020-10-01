@@ -48,3 +48,4 @@ EVENT_SX1262_BOLT_ERROR,        /* 0x08 | bolt communication error           | e
 EVENT_SX1262_STACK_WM,          /* 0x09 | stack watermark notification       | watermark + task ID */
 EVENT_SX1262_HOST_ID_ERROR,     /* 0x0a | error related to the host ID       | error code */
 EVENT_SX1262_SCHED_MISSED,      /* 0x0b | schedule packet missed             | error code */
+EVENT_SX1262_MUTEX_ERROR,       /* 0x0c | error related to mutual exclusion (semaphores, critical sections) | error code */
