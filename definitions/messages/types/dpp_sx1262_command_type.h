@@ -57,8 +57,8 @@ CMD_SX1262_ELECTION_MODUS,            /* 0x05 | Change the leader election modus
 CMD_SX1262_STOP_MODE,                 /* 0x06 | Change to stop mode 2 for given duration */                               /* @param: Duration after which the node should wake up, in ms */
 CMD_SX1262_CONF_EVENT_ADD,            /* 0x07 | Add new event configuration */                                            /* @param: TBD */
 CMD_SX1262_CONF_EVENT_DEL,            /* 0x08 | Delete event configuration */                                             /* @param: TBD */
+CMD_SX1262_SET_CODETECTION_THRESHOLD, /* 0x09 | Set the codetection threshold for reporting */                            /* @param: number of nodes that need to detect the same events */
 
-CMD_SX1262_RESERVED_09,
 CMD_SX1262_RESERVED_0A,
 CMD_SX1262_RESERVED_0B,
 CMD_SX1262_RESERVED_0C,
