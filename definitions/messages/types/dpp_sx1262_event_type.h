@@ -31,7 +31,7 @@
  *          Tonio Gsell
  */
 
-/* 
+/*
  * event types specific to SX1262
  */
 
@@ -49,3 +49,7 @@ EVENT_SX1262_STACK_WM,          /* 0x09 | stack watermark notification       | w
 EVENT_SX1262_HOST_ID_ERROR,     /* 0x0a | error related to the host ID       | error code */
 EVENT_SX1262_SCHED_MISSED,      /* 0x0b | schedule packet missed             | error code */
 EVENT_SX1262_MUTEX_ERROR,       /* 0x0c | error related to mutual exclusion (semaphores, critical sections) | error code */
+EVENT_SX1262_TSYNC_ERROR,       /* 0x0d | error or warning related to time synchronization                  | error code */
+EVENT_SX1262_TSYNC_DRIFT,       /* 0x0e | high drift warning                                                | drift (ppm) */
+EVENT_SX1262_RTC_ERROR,         /* 0x0f | error related to the RTC                                          | error code */
+EVENT_SX1262_TIMEOUT,           /* 0x10 | generic timeout error                                             | error code */
