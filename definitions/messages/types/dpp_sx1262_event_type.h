@@ -53,3 +53,4 @@ EVENT_SX1262_TSYNC_ERROR,       /* 0x0d | error or warning related to time synch
 EVENT_SX1262_TSYNC_DRIFT,       /* 0x0e | high drift warning                                                | drift (ppm) */
 EVENT_SX1262_RTC_ERROR,         /* 0x0f | error related to the RTC                                          | error code */
 EVENT_SX1262_TIMEOUT,           /* 0x10 | generic timeout error                                             | error code */
+EVENT_SX1262_RESET,             /* 0x11 | device reset occurred              | reset cause (16-bit) + counter (16-bit) */
