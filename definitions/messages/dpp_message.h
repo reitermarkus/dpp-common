@@ -195,12 +195,12 @@ typedef struct {
   uint16_t            cpu_dc_com;     /* CPU duty cycle (COM) [10^-2 %] */
   uint8_t             supply_vcc;     /* system supply voltage [10^-1 V] */
   uint8_t             nv_mem;         /* Non-volatile memory usage (typically SD card of APP) [%] */
-  uint8_t             stack_wm;       /* Stack watermark (max value of APP and COM) [%] */
+  uint8_t             stack_wm;       /* Stack watermark (max value of APP and COM) [%] (note: MSB = 1 for AP, MSB = 0 for CP) */
   int8_t              temperature;    /* Ambient temperature [°C] */
   uint8_t             humidity;       /* Ambient humidity [%] */
   uint8_t             radio_prr;      /* Average packet reception rate [%] */
   int8_t              radio_rssi;     /* Average receive signal strength indicator [dBm] */
-  uint8_t             radio_hop_cnt;  /* Average hop count on first reception [hops * 10] */
+  uint8_t             radio_hop_cnt;  /* Average hop count on first reception [10^-1 hops] */
   uint16_t            radio_rx_dc;    /* RX duty cycle (COM) [10^-2 %] */
   uint16_t            radio_tx_dc;    /* TX duty cycle (COM) [10^-2 %] */
 } dpp_health_min_t;
