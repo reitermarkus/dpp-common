@@ -54,3 +54,4 @@ EVENT_SX1262_TSYNC_DRIFT,       /* 0x0e | high drift warning                    
 EVENT_SX1262_RTC_ERROR,         /* 0x0f | error related to the RTC                                          | error code */
 EVENT_SX1262_TIMEOUT,           /* 0x10 | generic timeout error                                             | error code */
 EVENT_SX1262_RESET,             /* 0x11 | device reset occurred              | reset cause (16-bit) + counter (16-bit) */
+EVENT_SX1262_TX_FAILED,         /* 0x12 | transmission failed (e.g. due to channel busy or no ACK received) | error code */
