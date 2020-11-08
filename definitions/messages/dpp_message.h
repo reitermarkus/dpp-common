@@ -230,14 +230,15 @@ typedef struct {
 
 
 #define DPP_FW_HDR_LEN      4
-#define DPP_FW_BLOCK_SIZE   64
+#define DPP_FW_BLOCK_SIZE   96    /* must be a multiple of 8 */
+
 typedef struct {
   dpp_fw_type_t type : 8;
   uint8_t       component_id;
   uint16_t      version;
   union {
     struct {
-      uint16_t  len;    /* total length in bytes */
+      uint32_t  len;    /* total length in bytes */
       uint32_t  crc;    /* 32bit CRC over complete FW data ('len' bytes) */
     } info;
     struct {

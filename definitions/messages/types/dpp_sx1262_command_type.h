@@ -59,16 +59,16 @@ CMD_SX1262_CONF_EVENT_ADD,            /* 0x07 | Add new event configuration */  
 CMD_SX1262_CONF_EVENT_DEL,            /* 0x08 | Delete event configuration */                                             /* @param: TBD */
 CMD_SX1262_SET_CODETECTION_THRESHOLD, /* 0x09 | Set the codetection threshold for reporting */                            /* @param: number of nodes that need to detect the same events */
 CMD_SX1262_SET_CAD_MODE,              /* 0x0A | Set channel activity detection mode */                                    /* @param: mode (0 = disable) */
+CMD_SX1262_SET_HEALTH_MSG_PRIORITY,   /* 0x0B | Set the priority for health message generation */                         /* @param: 0 = low priority, 1 = high priority */
 
-CMD_SX1262_RESERVED_0B,
 CMD_SX1262_RESERVED_0C,
 CMD_SX1262_RESERVED_0D,
 CMD_SX1262_RESERVED_0E,
 CMD_SX1262_RESERVED_0F,
 CMD_SX1262_RESERVED_10,
 CMD_SX1262_RESERVED_11,
-CMD_SX1262_RESERVED_12,
 
+CMD_SX1262_FW_OTA_MODE,               /* 0x12 | enter FW update mode */                /* @param: 16-bit key */
 CMD_SX1262_RESET,                     /* 0x13 | perform a software reset */
 
 /* Baseboard commands */

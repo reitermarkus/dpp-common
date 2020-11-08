@@ -73,6 +73,7 @@ typedef struct list_meta {
 /* --- function prototypes --- */
 
 uint16_t crc16(const uint8_t* data, uint8_t num_bytes, uint16_t init_value);
+uint32_t crc32(const uint8_t* data, uint16_t num_bytes, uint32_t seed);
 
 uint32_t hexstr_to_uint32(const char* str);
 uint32_t uint16_to_str(uint16_t val, char* out_buffer);
