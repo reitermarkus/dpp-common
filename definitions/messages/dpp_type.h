@@ -113,11 +113,11 @@ typedef enum {
 /* dpp fw packet types */
 typedef enum {
   DPP_FW_TYPE_INVALID = 0,
-  DPP_FW_TYPE_DATA,
-  DPP_FW_TYPE_CHECK,    /* request FW verification */
-  DPP_FW_TYPE_READY,    /* response to a FW validation request */
-  DPP_FW_TYPE_DATAREQ,  /* request missing FW data packets */
-  DPP_FW_TYPE_UPDATE,   /* initiate the FW update */
+  DPP_FW_TYPE_DATA,     /* FW data block ('data') */
+  DPP_FW_TYPE_CHECK,    /* request FW verification ('info') */
+  DPP_FW_TYPE_READY,    /* response to a FW validation request (header only, no payload) */
+  DPP_FW_TYPE_DATAREQ,  /* request missing FW data packets ('req') */
+  DPP_FW_TYPE_UPDATE,   /* initiate the FW update (header only, no payload) */
 } dpp_fw_type_t;
 
 
