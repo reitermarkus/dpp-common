@@ -60,8 +60,8 @@ CMD_SX1262_CONF_EVENT_DEL,            /* 0x08 | Delete event configuration */   
 CMD_SX1262_SET_CODETECTION_THRESHOLD, /* 0x09 | Set the codetection threshold for reporting */                            /* @param: number of nodes that need to detect the same events */
 CMD_SX1262_SET_CAD_MODE,              /* 0x0A | Set channel activity detection mode */                                    /* @param: mode (0 = disable) */
 CMD_SX1262_SET_HEALTH_MSG_PRIORITY,   /* 0x0B | Set the priority for health message generation */                         /* @param: 0 = low priority, 1 = high priority */
+CMD_SX1262_SET_STAG_WAKEUP_TIMEOUT,   /* 0x0C | Set the timeout for the staggered wakeup, in ms */                        /* @param: timeout in ms [16-bit] */
 
-CMD_SX1262_RESERVED_0C,
 CMD_SX1262_RESERVED_0D,
 CMD_SX1262_RESERVED_0E,
 CMD_SX1262_RESERVED_0F,
