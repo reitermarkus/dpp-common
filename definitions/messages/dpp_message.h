@@ -143,6 +143,7 @@ typedef struct {
   uint8_t             fw_name[8];       /* name of the firmware/application */
   uint16_t            fw_ver;           /* firmware version: human-readable (e.g. ABBCC where A: major, B: minor, C: patch */
   uint32_t            sw_rev_id;        /* repository revision number (GIT or SVN) */
+  uint32_t            config;           /* bitfield for custom (application specific) compile-time configuration settings */
 } dpp_node_info_t;
 
 
