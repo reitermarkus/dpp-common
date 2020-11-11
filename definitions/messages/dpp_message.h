@@ -131,7 +131,7 @@ typedef uint64_t dpp_timestamp_t;
 #pragma pack(1)
 
 
-#define DPP_NODE_INFO_LEN   42          /* bytes */
+#define DPP_NODE_INFO_LEN   46          /* bytes */
 typedef struct {
   uint8_t             component_id;     /* application specific component id */
   uint8_t             rst_flag;         /* reset cause / source */
