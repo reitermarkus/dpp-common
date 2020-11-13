@@ -65,9 +65,9 @@ CMD_SX1262_SET_STAG_WAKEUP_TIMEOUT,   /* 0x0C | Set the timeout for the staggere
 CMD_SX1262_RESERVED_0D,
 CMD_SX1262_RESERVED_0E,
 CMD_SX1262_RESERVED_0F,
-CMD_SX1262_RESERVED_10,
-CMD_SX1262_RESERVED_11,
 
+CMD_SX1262_SET_NODE_ID,               /* 0x10 | Set the node ID */                     /* @param: 16-bit node ID */
+CMD_SX1262_RESERVED_11,
 CMD_SX1262_FW_OTA_MODE,               /* 0x12 | enter FW update mode */                /* @param: 16-bit key */
 CMD_SX1262_RESET,                     /* 0x13 | perform a software reset */
 
