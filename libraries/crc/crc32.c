@@ -33,7 +33,7 @@
 #include <stdint.h>
 
 /*---------------------------------------------------------------------------*/
-uint32_t crc32(const uint8_t* data, uint16_t num_bytes, uint32_t seed)
+uint32_t crc32(const uint8_t* data, uint32_t num_bytes, uint32_t seed)
 {
   uint32_t crc = ~seed;
   while (num_bytes) {
