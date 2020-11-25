@@ -56,3 +56,4 @@ EVENT_SX1262_TIMEOUT,           /* 0x10 | generic timeout error                 
 EVENT_SX1262_RESET,             /* 0x11 | device reset occurred              | reset cause (16-bit) + counter (16-bit) */
 EVENT_SX1262_TX_FAILED,         /* 0x12 | transmission failed (e.g. due to channel busy or no ACK received) | error code */
 EVENT_SX1262_FW_OTA_STATUS,     /* 0x13 | firmware update status             | status code */
+EVENT_SX1262_CMD_FORWARDED,     /* 0x14 | command forwarded                  | target ID */

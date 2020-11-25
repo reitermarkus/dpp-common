@@ -189,7 +189,7 @@ typedef struct {
 
 
 /* combined (APP + COM) minimal health message */
-#define DPP_HEALTH_MIN_LEN  18
+#define DPP_HEALTH_MIN_LEN  22
 typedef struct {
   uint16_t            uptime;         /* system uptime (either COM or APP) [h] */
   uint16_t            cpu_dc_app;     /* CPU duty cycle (APP) [10^-2 %] */
@@ -204,6 +204,8 @@ typedef struct {
   uint8_t             radio_hop_cnt;  /* Average hop count on first reception [10^-1 hops] */
   uint16_t            radio_rx_dc;    /* RX duty cycle (COM) [10^-2 %] */
   uint16_t            radio_tx_dc;    /* TX duty cycle (COM) [10^-2 %] */
+  uint16_t            events;         /* bit field to indicate events that occurred */
+  uint16_t            config;         /* contains a part of the current node configuration (bit field) */
 } dpp_health_min_t;
 
 
