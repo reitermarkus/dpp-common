@@ -104,7 +104,7 @@ CMD_SX1262_RESERVED_2E,
 CMD_SX1262_RESERVED_2F,
 
 /* radio commands */
-CMD_SX1262_SET_TX_POWER,              /* 0x30 | Set the radio transmit power */   /* @param: TX power in dBm (1 byte, signed) */
+CMD_SX1262_SET_TX_POWER,              /* 0x30 | Set the radio transmit power */   /* @param: TX power in dBm (16-bit, signed) */
 CMD_SX1262_SET_MODULATION,            /* 0x31 | Set the radio modulation */       /* @param: modulation table index according to radio_constants.c (1 byte) */
 
 /* Label ----------------------------- | #No. | Description ----------------------------*/
