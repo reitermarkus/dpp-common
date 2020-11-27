@@ -37,7 +37,7 @@
 
 /* Label ----------------------- | #No. | Description ---------------------- | Value ---*/
 
-EVENT_SX1262_CMD_EXECUTED,      /* 0x01 | command executed (ACK)             | cmd type (16-bit) + argument (16-bit) */
+EVENT_SX1262_CMD_EXECUTED,      /* 0x01 | command executed (ACK)             | cmd type without component ID (16-bit) + argument (16-bit) */
 EVENT_SX1262_TIME_UPDATED,      /* 0x02 | local time has been adjusted       | time delta / jump in ms (32-bit signed) */
 EVENT_SX1262_QUEUE_FULL,        /* 0x03 | queue full, message dropped        | queue ID (32-bit) */
 EVENT_SX1262_INV_MSG,           /* 0x04 | invalid message received           | sender device ID (16-bit) + message length in bytes (16-bit) */
@@ -51,8 +51,8 @@ EVENT_SX1262_SCHED_MISSED,      /* 0x0b | schedule packet missed             | e
 EVENT_SX1262_MUTEX_ERROR,       /* 0x0c | error related to mutual exclusion (semaphores, critical sections) | error code (32-bit) */
 EVENT_SX1262_TSYNC_ERROR,       /* 0x0d | error or warning related to time synchronization                  | error code (32-bit) */
 EVENT_SX1262_TSYNC_DRIFT,       /* 0x0e | high drift warning                                                | drift in ppm (signed 32-bit) */
-EVENT_SX1262_RTC_ERROR,         /* 0x0f | error related to the RTC                                          | error code */
-EVENT_SX1262_TIMEOUT,           /* 0x10 | generic timeout error                                             | error code */
+EVENT_SX1262_RTC_ERROR,         /* 0x0f | error related to the RTC                                          | error code (32-bit) */
+EVENT_SX1262_TIMEOUT,           /* 0x10 | generic timeout error                                             | error code (32-bit) */
 EVENT_SX1262_RESET,             /* 0x11 | device reset occurred              | reset cause (16-bit) + counter (16-bit) */
 EVENT_SX1262_TX_FAILED,         /* 0x12 | transmission failed (e.g. due to channel busy or no ACK received) | error code (32-bit) */
 EVENT_SX1262_FW_OTA_STATUS,     /* 0x13 | firmware update status             | progress in percent (32-bit) */

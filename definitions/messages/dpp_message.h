@@ -48,11 +48,12 @@
 /* max. message length (header + payload + CRC), limited by the COM module */
 #define DPP_MSG_PKT_LEN           126     /* uint8_t (max. 255) */
 #define DPP_MSG_HDR_LEN           16
+#define DPP_MSG_CRC_LEN           2       /* CRC-16-IBM / ANSI */
 /* max. message payload length */
-#define DPP_MSG_PAYLOAD_LEN       (DPP_MSG_PKT_LEN - DPP_MSG_HDR_LEN - 2)
+#define DPP_MSG_PAYLOAD_LEN       (DPP_MSG_PKT_LEN - DPP_MSG_HDR_LEN - DPP_MSG_CRC_LEN)
 /* actual message length incl. CRC */
 #define DPP_MSG_LEN(msg)          \
-    ((msg)->header.payload_len + DPP_MSG_HDR_LEN + 2)
+    ((msg)->header.payload_len + DPP_MSG_HDR_LEN + DPP_MSG_CRC_LEN)
 
 /* minimal message type with smaller header (set last bit of message type to
  * indicate an minimal message) */
@@ -60,9 +61,9 @@
 #define DPP_MSG_MIN_PKT_LEN       126     /* uint8_t (max. 255) */
 #define DPP_MSG_MIN_HDR_LEN       4
 #define DPP_MSG_MIN_PAYLOAD_LEN   \
-    (DPP_MSG_MIN_PKT_LEN - DPP_MSG_MIN_HDR_LEN - 2)
+    (DPP_MSG_MIN_PKT_LEN - DPP_MSG_MIN_HDR_LEN - DPP_MSG_CRC_LEN)
 #define DPP_MSG_MIN_LEN(msg)      \
-    ((msg)->header.payload_len + DPP_MSG_MIN_HDR_LEN + 2)
+    ((msg)->header.payload_len + DPP_MSG_MIN_HDR_LEN + DPP_MSG_CRC_LEN)
 
 
 /* special (reserved) device IDs */
@@ -158,9 +159,9 @@ typedef struct {
 typedef struct {
   dpp_command_type_t  type;         /* command ID */
   union {
-    uint8_t           arg[DPP_MSG_PAYLOAD_LEN - 2];   /* arguments (length depends on command) */
-    uint16_t          arg16[(DPP_MSG_PAYLOAD_LEN - 2) / 2];
-    uint32_t          arg32[(DPP_MSG_PAYLOAD_LEN - 2) / 4];
+    uint8_t           arg[DPP_MSG_PAYLOAD_LEN - DPP_COMMAND_HDR_LEN];   /* arguments (length depends on command) */
+    uint16_t          arg16[(DPP_MSG_PAYLOAD_LEN - DPP_COMMAND_HDR_LEN) / 2];
+    uint32_t          arg32[(DPP_MSG_PAYLOAD_LEN - DPP_COMMAND_HDR_LEN) / 4];
   };
 } dpp_command_t;
 
@@ -210,30 +211,37 @@ typedef struct {
 
 
 /* helper structs for dpp_data_aggr_t to create tuples of node ID and some other struct */
+#define DPP_DATA_AGGR_HEALTH_MIN_LEN    (2 + DPP_HEALTH_MIN_LEN)
 typedef struct {
   uint16_t            node_id;
   dpp_health_min_t    health_min;
 } dpp_data_aggr_health_min_t;
 
+#define DPP_DATA_AGGR_GEO_ACQ_MIN_LEN   (2 + DPP_HEALTH_MIN_LEN)
 typedef struct {
   uint16_t                node_id;
   dpp_geophone_acq_min_t  geo_acq_min;
 } dpp_data_aggr_geo_acq_min_t;
 
 /* for general data aggregation (several 'blocks' of the same type of data sequentialized) */
+#define DPP_DATA_AGGR_HDR_LEN     2
 #define DPP_DATA_AGGR_LEN(aggr)   (((aggr)->block_cnt * (aggr)->block_size) + 2)
 typedef struct {
   uint8_t                       block_cnt;
   uint8_t                       block_size;
   union {
-    dpp_data_aggr_health_min_t  health_blocks[(DPP_MSG_PAYLOAD_LEN - 2) / (DPP_HEALTH_MIN_LEN + 2)];
-    dpp_data_aggr_geo_acq_min_t geo_acq_blocks[(DPP_MSG_PAYLOAD_LEN - 2) / (DPP_GEOPHONE_ACQ_MIN_LEN + 2)];
+    dpp_data_aggr_health_min_t  health_blocks[(DPP_MSG_PAYLOAD_LEN - DPP_DATA_AGGR_HDR_LEN) / DPP_DATA_AGGR_HEALTH_MIN_LEN];
+    dpp_data_aggr_geo_acq_min_t geo_acq_blocks[(DPP_MSG_PAYLOAD_LEN - DPP_DATA_AGGR_HDR_LEN) / DPP_DATA_AGGR_GEO_ACQ_MIN_LEN];
   };
 } dpp_data_aggr_t;
 
 
-#define DPP_FW_HDR_LEN      4
-#define DPP_FW_BLOCK_SIZE   96    /* must be a multiple of 8 */
+#define DPP_FW_HDR_LEN        4
+#define DPP_FW_BLOCK_SIZE     96    /* must be a multiple of 8 */
+#define DPP_FW_INFO_LEN       (DPP_FW_HDR_LEN + 8)
+#define DPP_FW_DATA_LEN       (DPP_FW_HDR_LEN + 2 + DPP_FW_BLOCK_SIZE)
+#define DPP_FW_REQ_LEN(n)     (DPP_FW_HDR_LEN + 2 + 2 * (n))
+#define DPP_FW_REQ_MAX_BLOCKS ((DPP_MSG_PAYLOAD_LEN - 2 - DPP_FW_HDR_LEN) / 2)
 
 typedef struct {
   dpp_fw_type_t type : 8;
@@ -250,7 +258,7 @@ typedef struct {
     } data;
     struct {
       uint16_t  num;    /* 16-bit to avoid alignment issues */
-      uint16_t  block_ids[(DPP_MSG_PAYLOAD_LEN - 2 - DPP_FW_HDR_LEN) / 2];
+      uint16_t  block_ids[DPP_FW_REQ_MAX_BLOCKS];
     } req;
   };
 } dpp_fw_t;
