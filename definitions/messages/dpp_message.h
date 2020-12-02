@@ -217,7 +217,7 @@ typedef struct {
   dpp_health_min_t    health_min;
 } dpp_data_aggr_health_min_t;
 
-#define DPP_DATA_AGGR_GEO_ACQ_MIN_LEN   (2 + DPP_HEALTH_MIN_LEN)
+#define DPP_DATA_AGGR_GEO_ACQ_MIN_LEN   (2 + DPP_GEOPHONE_ACQ_MIN_LEN)
 typedef struct {
   uint16_t                node_id;
   dpp_geophone_acq_min_t  geo_acq_min;
