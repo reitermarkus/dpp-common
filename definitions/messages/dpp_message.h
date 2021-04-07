@@ -107,7 +107,17 @@ typedef enum {
   DPP_MSG_TYPE_GEO_ACQ_AGGR = 44,   /* Aggregated geophone acquisition event */
 
   /* no types below this */
-  DPP_MSG_TYPE_LASTID       = 127
+  DPP_MSG_TYPE_LASTID       = 127,
+
+  /* --- same message types as above, but with min. header type --- */
+
+  DPP_MSG_TYPE_INVALID_MIN  = 128,
+  DPP_MSG_TYPE_TIMESYNC_MIN,
+  DPP_MSG_TYPE_EVENT_MIN,
+  DPP_MSG_TYPE_NODE_INFO_MIN,
+  DPP_MSG_TYPE_CMD_MIN,
+  DPP_MSG_TYPE_FW_MIN,
+  DPP_MSG_TYPE_HEALTH_MIN_MIN,
 } dpp_message_type_t;
 
 
