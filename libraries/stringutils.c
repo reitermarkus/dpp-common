@@ -86,4 +86,24 @@ uint32_t bytes_to_hexstr(const uint8_t* bytes, uint32_t num_bytes, char* out_buf
   return len;
 }
 /*---------------------------------------------------------------------------*/
-
+int32_t str_to_int32(const char* str)
+{
+  int32_t val = 0;
+  uint8_t neg = 0;
+  /* skip nun-numerical character at the beginning */
+  while (*str && (*str < '0' || *str > '9') && (*str != '-')) {
+    str++;
+  }
+  if (*str && (*str == '-')) {
+    neg = 1;
+  }
+  while (*str && (*str >= '0' && *str <= '9')) {
+    val = val * 10 + (*str - '0');
+    str++;
+  }
+  if (neg) {
+    val = -val;
+  }
+  return val;
+}
+/*---------------------------------------------------------------------------*/

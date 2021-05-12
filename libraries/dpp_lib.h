@@ -78,6 +78,7 @@ uint32_t crc32(const uint8_t* data, uint32_t num_bytes, uint32_t seed);
 uint32_t hexstr_to_uint32(const char* str);
 uint32_t uint16_to_str(uint16_t val, char* out_buffer);
 uint32_t bytes_to_hexstr(const uint8_t* bytes, uint32_t num_bytes, char* out_buffer, uint32_t buffer_size);
+int32_t  str_to_int32(const char* str);
 
 void     memb_init(memb_t memb);
 void*    memb_allocate_block(memb_t memb);
