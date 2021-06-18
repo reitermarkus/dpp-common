@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Swiss Federal Institute of Technology (ETH Zurich).
+ * Copyright (c) 2017 - 2021, ETH Zurich, Computer Engineering Group (TEC)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,23 +26,19 @@
  * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * Authors: Reto Da Forno
- *          Tonio Gsell
- *          Akos Pasztor      
  */
 
-/* 
+/*
  * command types specific to APP (application processor)
  *
- * 
+ *
  * typedef enum {
  *   ...
  *   DPP_COMMAND_[device_name]  = [start_id],
  *   [your_defines]
- *   ...  
+ *   ...
  * } dpp_command_type_t;
- * 
+ *
  * add a comma after each define!
  */
 
