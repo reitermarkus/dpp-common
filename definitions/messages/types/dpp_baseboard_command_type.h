@@ -37,9 +37,9 @@
 /* Label ------------------------- | #No. | Description ---------------------*/
 
 /* system commands */
-CMD_BASEBOARD_POWEROFF,           /* 0x01 | perform soft shutdown and power off */ /* @param 0: immedate, 1: wait if busy (1 byte) */
+CMD_BASEBOARD_POWEROFF,           /* 0x01 | perform soft shutdown and power off */ /* @param 0: immediate, 1: wait if busy (1 byte) */
 CMD_BASEBOARD_SUSPEND,            /* 0x02 | suspend system */                      /* @param none */
-CMD_BASEBOARD_WAKEUP_MODE,        /* 0x03 | wakeup mode */                         /* @param wakup mode (2 bytes) */
+CMD_BASEBOARD_WAKEUP_MODE,        /* 0x03 | wakeup mode */                         /* @param wakeup mode (2 bytes) */
 CMD_BASEBOARD_MSG_ROUTING,        /* 0x04 | DPP message routing */                 /* @param 0: to GSN, 1: to LWB network, 2: both (to GSN and LWB network) */
 
 CMD_BASEBOARD_RESERVED_05,

@@ -52,7 +52,7 @@
     ((msg)->header.payload_len + DPP_MSG_HDR_LEN + DPP_MSG_CRC_LEN)
 
 /* minimal message type with smaller header (set last bit of message type to
- * indicate an minimal message) */
+ * indicate a minimal message) */
 #define DPP_MSG_TYPE_MIN          0x80    /* mask (msb) */
 #define DPP_MSG_MIN_PKT_LEN       126     /* uint8_t (max. 255) */
 #define DPP_MSG_MIN_HDR_LEN       4
@@ -93,7 +93,7 @@ typedef enum {
   DPP_MSG_TYPE_WGPS_STATUS  = 35,   /* Wireless GPS  */
   DPP_MSG_TYPE_GEOPHONE_ACQ = 36,   /* Geophone acquire data */
   DPP_MSG_TYPE_IMU          = 37,   /* imu data */
-  DPP_MSG_TYPE_ADCDATA      = 38,   /* event acquistion (ADC) data */
+  DPP_MSG_TYPE_ADCDATA      = 38,   /* event acquisition (ADC) data */
   DPP_MSG_TYPE_INCLINO      = 39,   /* inclinometer data */
 
   /* event-driven specific message types */
