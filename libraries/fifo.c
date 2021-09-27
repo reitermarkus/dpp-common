@@ -89,7 +89,7 @@ bool fifo_push(fifo_t fifo, const void* elem)
   if (f->write_idx == f->num_elem) {
     f->write_idx = 0;
   }
-  return false;
+  return true;
 }
 /*---------------------------------------------------------------------------*/
 bool fifo_pop(fifo_t fifo, void* elem)
