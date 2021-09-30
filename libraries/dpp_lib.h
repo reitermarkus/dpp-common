@@ -127,5 +127,6 @@ bool     fifo_is_full(const fifo_t fifo);
 uint32_t fifo_get_used_space(const fifo_t fifo);
 uint32_t fifo_get_free_space(const fifo_t fifo);
 
+void     bubble_sort_uint8(uint8_t* a, uint16_t len);
 
 #endif /* __DPP_LIB_H__ */
