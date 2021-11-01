@@ -66,6 +66,14 @@
 #define DPP_DEVICE_ID_SINK        0
 #define DPP_DEVICE_ID_BROADCAST   0xffff
 
+/* special (reserved) values for data fields */
+#define DPP_MSG_INV_UINT8         0xff            /* used to mark a uint8_t data value as invalid */
+#define DPP_MSG_INV_INT8          0x80
+#define DPP_MSG_INV_UINT16        0xffff
+#define DPP_MSG_INV_INT16         0x8000
+#define DPP_MSG_INV_UINT32        0xffffffff
+#define DPP_MSG_INF_INT32         0x80000000
+
 
 /* the message type (7 bits available, MSB is reserved) */
 typedef enum {
