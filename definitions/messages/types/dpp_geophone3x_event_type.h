@@ -56,7 +56,7 @@ EVENT_GEOPHONE3X_ACQ_ERR_TIMEOUT,     /* 0x09 | ACQ sampling error: semaphore ti
 EVENT_GEOPHONE3X_CONFIG_WR_ERR,       /* 0x0A | Config write to SD error */
 EVENT_GEOPHONE3X_CONFIG_RD_ERR,       /* 0x0B | Config read from SD error */
 EVENT_GEOPHONE3X_CONFIG_SYNTAX_ERR,   /* 0x0C | Config syntax error */
-EVENT_GEOPHONE3X_NA_0x0D,             /* 0x0D | */
+EVENT_GEOPHONE3X_TSYNC_INV_VAL,       /* 0x0D | Potentially invalid timestamp received */
 EVENT_GEOPHONE3X_NA_0x0E,             /* 0x0E | */
 EVENT_GEOPHONE3X_NA_0x0F,             /* 0x0F | */
 
@@ -105,6 +105,7 @@ EVENT_GEOPHONE3X_SD_FULL,             /* 0x36 | SD card is almost full */
 
 EVENT_GEOPHONE3X_GNSS_CRC_ERR,        /* 0x37 | GNSS message CRC error */
 EVENT_GEOPHONE3X_RTC_SYNC,            /* 0x38 | RTC has been synced */
+EVENT_GEOPHONE3X_GNSS_UART_ERR,       /* 0x39 | GNSS UART error */
 
 
 /* Label --------------------------- | #No. | Description ----------------------------*/

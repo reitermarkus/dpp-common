@@ -56,7 +56,7 @@ EVENT_GEOPHONE_ACQ_ERR_TIMEOUT,     /* 0x09 | ACQ sampling error: semaphore time
 EVENT_GEOPHONE_CONFIG_WR_ERR,       /* 0x0A | Config write to SD error */
 EVENT_GEOPHONE_CONFIG_RD_ERR,       /* 0x0B | Config read from SD error */
 EVENT_GEOPHONE_CONFIG_SYNTAX_ERR,   /* 0x0C | Config syntax error */
-EVENT_GEOPHONE_NA_0x0D,             /* 0x0D | */
+EVENT_GEOPHONE_TSYNC_INV_VAL,       /* 0x0D | Potentially invalid timestamp received */
 EVENT_GEOPHONE_NA_0x0E,             /* 0x0E | */
 EVENT_GEOPHONE_NA_0x0F,             /* 0x0F | */
 
