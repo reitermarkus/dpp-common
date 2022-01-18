@@ -60,7 +60,7 @@ typedef enum {
 #include "types/dpp_sx1262_command_type.h"
 
   DPP_COMMAND_GEO3X      = ((uint16_t)DPP_COMPONENT_ID_GEO3X << 8),
-//#include "types/dpp_geo3x_command_type.h"
+//#include "types/dpp_geophone3x_command_type.h"
 
   DPP_COMMAND_GEOMINI    = ((uint16_t)DPP_COMPONENT_ID_GEOMINI << 8),
 //#include "types/dpp_geomini_command_type.h"
@@ -94,7 +94,7 @@ typedef enum {
 #include "types/dpp_sx1262_event_type.h"
 
   DPP_EVENT_GEO3X        = ((uint16_t)DPP_COMPONENT_ID_GEO3X << 8),
-//#include "types/dpp_geo3x_event_type.h"
+#include "types/dpp_geophone3x_event_type.h"
 
   DPP_EVENT_GEOMINI      = ((uint16_t)DPP_COMPONENT_ID_GEOMINI << 8),
 //#include "types/dpp_geomini_event_type.h"
