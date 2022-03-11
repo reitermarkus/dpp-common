@@ -58,6 +58,18 @@
                                                             static fifo_meta_t fifo_name##_fifo_info = { 0, 0, element_size, num_elements, fifo_name##_fifo_buffer }; \
                                                             fifo_t fifo_name = &fifo_name##_fifo_info
 
+#define SWAP_VALUES(a, b, tmp)  tmp = a; a = b; b = tmp
+
+#ifndef ABS
+#define ABS(x)                  (((x) < 0) ? (-(x)) : (x))
+#endif
+#ifndef MIN
+#define MIN(x, y)               (((x) < (y)) ? (x) : (y))
+#endif
+#ifndef MAX
+#define MAX(x, y)               (((x) > (y)) ? (x) : (y))
+#endif
+
 
 /* --- typedefs --- */
 
@@ -95,8 +107,9 @@ typedef struct list_meta {
 
 /* --- function prototypes --- */
 
-uint16_t crc16(const uint8_t* data, uint16_t num_bytes, uint16_t init_value);
-uint32_t crc32(const uint8_t* data, uint32_t num_bytes, uint32_t seed);
+uint8_t  crc8(const uint8_t* data, uint32_t num_bytes, uint8_t init_val);
+uint16_t crc16(const uint8_t* data, uint16_t num_bytes, uint16_t init_val);
+uint32_t crc32(const uint8_t* data, uint32_t num_bytes, uint32_t init_val);
 
 uint32_t hexstr_to_uint32(const char* str);
 uint32_t uint16_to_str(uint16_t val, char* out_buffer);
@@ -128,5 +141,8 @@ uint32_t fifo_get_used_space(const fifo_t fifo);
 uint32_t fifo_get_free_space(const fifo_t fifo);
 
 void     bubble_sort_uint8(uint8_t* a, uint16_t len);
+
+uint32_t gcd(uint32_t a, uint32_t b);
+uint32_t lcm(uint32_t a, uint32_t b);
 
 #endif /* __DPP_LIB_H__ */

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 - 2021, ETH Zurich, Computer Engineering Group (TEC)
+ * Copyright (c) 2017 - 2022, ETH Zurich, Computer Engineering Group (TEC)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -28,28 +28,33 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <stdint.h>
+
+#include "dpp_lib.h"
 
 /*---------------------------------------------------------------------------*/
-/* CRC-16-IBM, CRC-16-ANSI */
-uint16_t crc16(const uint8_t* data, uint16_t num_bytes, uint16_t init_value)
+/* Greatest common divisor (Euclidean algorithm) */
+uint32_t gcd(uint32_t a, uint32_t b)
 {
-  uint16_t crc = init_value;
-  while(num_bytes) {
-    uint16_t ch  = *data;
-    uint16_t bit = 8;
-    while(bit) {
-      if((crc & 1) ^ (ch & 1)) {
-        crc = (crc >> 1) ^ 0xa001;    /* mask is 0xa001*/
-      } else {
-        crc >>= 1;
-      }
-      ch >>= 1;
-      bit--;
-    }
-    data++;
-    num_bytes--;
+  if (a == 0 || b == 0) {
+    return 0;
   }
-  return crc;
+  if (a < b) {
+    unsigned int tmp;
+    SWAP_VALUES(a, b, tmp);
+  }
+  unsigned int r = a % b;
+  while (r) {
+    a = b;
+    b = r;
+    r = a % b;
+  }
+  return b;
+}
+/*---------------------------------------------------------------------------*/
+/* Least (lowest) common multiple */
+uint32_t lcm(uint32_t a, uint32_t b)
+{
+  uint32_t div = gcd(a, b);
+  return (div ? (a * b / div) : 0);
 }
 /*---------------------------------------------------------------------------*/

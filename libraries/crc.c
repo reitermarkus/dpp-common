@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 - 2021, ETH Zurich, Computer Engineering Group (TEC)
+ * Copyright (c) 2017 - 2022, ETH Zurich, Computer Engineering Group (TEC)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -28,19 +28,66 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <stdint.h>
+
+#include "dpp_lib.h"
 
 /*---------------------------------------------------------------------------*/
-uint32_t crc32(const uint8_t* data, uint32_t num_bytes, uint32_t seed)
+/* CRC-8-Dallas/Maxim, based on: http://stackoverflow.com/questions/29214301/ios-how-to-calculate-crc-8-dallas-maxim-of-nsdata */
+uint8_t crc8(const uint8_t* data, uint32_t num_bytes, uint8_t init_val)
 {
-  uint32_t crc = ~seed;
+  const uint16_t poly = 0x131;
+  uint32_t       crc  = init_val;
   while (num_bytes) {
-    crc ^= (*data);
-    uint16_t i = 8;
-    while (i) {
+    crc         ^= *data;
+    uint32_t bit = 8;
+    while (bit) {
+      if (crc & 0x80) {
+        crc = (crc << 1) ^ poly;
+      } else {
+        crc <<= 1;
+      }
+      bit--;
+    }
+    data++;
+    num_bytes--;
+  }
+  return (uint8_t)crc;
+}
+/*---------------------------------------------------------------------------*/
+/* CRC-16-IBM, CRC-16-ANSI */
+uint16_t crc16(const uint8_t* data, uint16_t num_bytes, uint16_t init_val)
+{
+  const uint16_t poly = 0xa001;
+  uint16_t       crc  = init_val;
+  while (num_bytes) {
+    uint16_t ch  = *data;
+    uint16_t bit = 8;
+    while (bit) {
+      if ((crc & 1) ^ (ch & 1)) {
+        crc = (crc >> 1) ^ poly;
+      } else {
+        crc >>= 1;
+      }
+      ch >>= 1;
+      bit--;
+    }
+    data++;
+    num_bytes--;
+  }
+  return crc;
+}
+/*---------------------------------------------------------------------------*/
+uint32_t crc32(const uint8_t* data, uint32_t num_bytes, uint32_t init_val)
+{
+  const uint32_t poly = 0xedb88320;
+  uint32_t       crc  = ~init_val;
+  while (num_bytes) {
+    crc         ^= (*data);
+    uint32_t bit = 8;
+    while (bit) {
       uint32_t mask = -(crc & 1);
-      crc  = (crc >> 1) ^ (0xedb88320 & mask);
-      i--;
+      crc           = (crc >> 1) ^ (poly & mask);
+      bit--;
     }
     data++;
     num_bytes--;
