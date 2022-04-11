@@ -42,8 +42,6 @@
  * S T R U C T S
  */
 
-#pragma pack(1)    /* force alignment to 1 byte */
-
 
 #define DPP_APP_HEALTH_LEN      22          /* bytes */
 typedef struct {
@@ -59,7 +57,8 @@ typedef struct {
   uint16_t          supply_current;         /* Supply [10^-5 A] */
   int16_t           temperature;            /* Temperature [10^-2 °C] */
   uint16_t          humidity;               /* Humidity [10^-2 %] */
-} dpp_app_health_t;
+} __attribute__((packed)) dpp_app_health_t;
+ASSERT_SIZE(dpp_app_health_t, DPP_APP_HEALTH_LEN);
 
 
 #define DPP_IMU_LEN             12          /* bytes */
@@ -70,7 +69,9 @@ typedef struct {
   uint16_t          mag_x;                  /* Magnetometer X-axis raw data */
   uint16_t          mag_y;                  /* Magnetometer Y-axis raw data */
   uint16_t          mag_z;                  /* Magnetometer Z-axis raw data */
-} dpp_imu_t;
+} __attribute__((packed)) dpp_imu_t;
+ASSERT_SIZE(dpp_imu_t, DPP_IMU_LEN);
+
 
 #define DPP_INCLINO_LEN         14          /* bytes */
 typedef struct {
@@ -81,7 +82,8 @@ typedef struct {
   uint16_t          ang_y;                  /* Angle Y-axis raw data */
   uint16_t          ang_z;                  /* Angle Z-axis raw data */
   uint16_t          temperature;            /* Temperature raw data */
-} dpp_inclino_t;
+} __attribute__((packed)) dpp_inclino_t;
+ASSERT_SIZE(dpp_inclino_t, DPP_INCLINO_LEN);
 
 
 #define DPP_WGPS_STATUS_LEN     30          /* bytes */
@@ -100,7 +102,8 @@ typedef struct {
   uint16_t          mag_y;                  /* Magnetometer Y-axis raw data */
   uint16_t          mag_z;                  /* Magnetometer Z-axis raw data */
   uint16_t          status;                 /* Bit0: gps power state (on/off) */
-} dpp_wgps_status_t;
+} __attribute__((packed)) dpp_wgps_status_t;
+ASSERT_SIZE(dpp_wgps_status_t, DPP_WGPS_STATUS_LEN);
 
 
 #define DPP_GNSS_SV_LEN         42          /* bytes */
@@ -121,7 +124,8 @@ typedef struct {
   uint8_t           cpStDev;                /* Estimated carrier-phase std. deviation */
   uint8_t           doStDev;                /* Estimated doppler std. deviation */
   uint8_t           trkStat;                /* Tracking status bitfield */
-} dpp_gnss_sv_t;
+} __attribute__((packed)) dpp_gnss_sv_t;
+ASSERT_SIZE(dpp_gnss_sv_t, DPP_GNSS_SV_LEN);
 
 
 #define DPP_GEOPHONE_ACQ_LEN    65          /* bytes*/
@@ -144,7 +148,8 @@ typedef struct {
   uint8_t           adc_pga;                /* ADC PGA value. 0: PGA is off. */
   uint32_t          acq_id;                 /* Acquisition ID */
   uint8_t           adc_sps;                /* ADC rate (sampling frequency), 0 = 1kHz, 1 = 500Hz, 2 = 250Hz, 3 = 125Hz */
-} dpp_geophone_acq_t;
+} __attribute__((packed)) dpp_geophone_acq_t;
+ASSERT_SIZE(dpp_geophone_acq_t, DPP_GEOPHONE_ACQ_LEN);
 
 
 #define DPP_GEOPHONE_ACQ_MIN_LEN    10      /* bytes*/
@@ -154,7 +159,8 @@ typedef struct {
   uint16_t          amplitude;              /* Signal amplitude (pos. or neg.) */
   uint16_t          trg_count;              /* Count of triggers (pos. + neg.) */
   uint16_t          duration;               /* Event duration in ms */
-} dpp_geophone_acq_min_t;
+} __attribute__((packed)) dpp_geophone_acq_min_t;
+ASSERT_SIZE(dpp_geophone_acq_min_t, DPP_GEOPHONE_ACQ_MIN_LEN);
 
 
 #define DPP_GEOPHONE_ADC_LEN                   DPP_MSG_PAYLOAD_LEN
@@ -168,13 +174,15 @@ typedef struct {
 #define DPP_GEOPHONE_SET_ADC_DFMT(adc_df, b, s, c)       ((adc_df) = (((b) & DPP_GEOPHONE_ADC_DFMT_BPS_MASK))  | \
                                                                      (((s) << 2) & DPP_GEOPHONE_ADC_DFMT_SUBSAMPLING_MASK) | \
                                                                      (((c) << 4) & DPP_GEOPHONE_ADC_DFMT_TYPE_MASK))
+
+
 typedef struct {
   uint32_t          acq_id;                 /* acquisition ID */
   uint16_t          offset;                 /* offset from the start of the waveform, in no. of packets */
   uint16_t          packets;                /* total no. of packets for this waveform */
   uint8_t           adc_data_fmt;           /* data format for the adc samples (see above) */
   uint8_t           adc_data[DPP_GEOPHONE_ADC_LEN - DPP_GEOPHONE_ADC_HDR_LEN];  /* use the remaining bytes of this packet to store the ADC samples */
-} dpp_geophone_adc_t;
+} __attribute__((packed)) dpp_geophone_adc_t;
 
 
 #define DPP_GEO_SPEC_INFO_TYPE_FFT            0x00
@@ -199,6 +207,7 @@ typedef struct {
 #define DPP_GEO_SPEC_INFO_NFFT_RESERVED       0xE0
 #define DPP_GEO_SPEC_INFO_NFFT_MASK           0xE0
 
+
 #define DPP_GEO_SPEC_ENC_TYPE_FLOAT32         0x00      /* 32-bit float (raw values) */
 #define DPP_GEO_SPEC_ENC_TYPE_UINT8           0x01      /* unsigned 8-bit integer in the form: -2 * dB_val */
 #define DPP_GEO_SPEC_ENC_TYPE_INT8            0x02      /* signed integer (dB value) */
@@ -221,17 +230,16 @@ typedef struct {
 #define DPP_GEO_SPEC_ENC_DECIMATION_RESERVED2 0xE0
 #define DPP_GEO_SPEC_ENC_DECIMATION_MASK      0xE0
 
+
 #define DPP_GEO_SPEC_HDR_LEN                  2
+
 
 /* Spectrogram */
 typedef struct {
   uint8_t info;                   /* type (used as a bitfield) */
   uint8_t enc;                    /* data encoding (used as a bitfield) */
   uint8_t data[DPP_MSG_PAYLOAD_LEN - DPP_GEO_SPEC_HDR_LEN];
-} dpp_geophone_spec_t;
-
-
-#pragma pack()
+} __attribute__((packed)) dpp_geophone_spec_t;
 
 
 #endif /* __DPP_APP_MESSAGE_H__ */

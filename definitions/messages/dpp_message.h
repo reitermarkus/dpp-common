@@ -41,6 +41,10 @@
  * D E F I N E S
  */
 
+
+#define ASSERT_SIZE(type, size) _Static_assert(sizeof(type) == size, "Size of `" #type "` must be `" #size "`.")
+
+
 /* max. message length (header + payload + CRC), limited by the COM module */
 #define DPP_MSG_PKT_LEN           126     /* uint8_t (max. 255) */
 #define DPP_MSG_HDR_LEN           16
@@ -65,6 +69,7 @@
 /* special (reserved) device IDs */
 #define DPP_DEVICE_ID_SINK        0
 #define DPP_DEVICE_ID_BROADCAST   0xffff
+
 
 /* special (reserved) values for data fields */
 #define DPP_MSG_INV_UINT8         0xff            /* used to mark a uint8_t data value as invalid */
@@ -123,7 +128,8 @@ typedef enum {
   DPP_MSG_TYPE_CMD_MIN,
   DPP_MSG_TYPE_FW_MIN,
   DPP_MSG_TYPE_HEALTH_MIN_MIN,
-} dpp_message_type_t;
+} __attribute__((packed)) dpp_message_type_t;
+ASSERT_SIZE(dpp_message_type_t, 1);
 
 
 /* timestamp in microseconds */
@@ -139,12 +145,10 @@ typedef uint64_t dpp_timestamp_t;
 #include "dpp_com_message.h"
 #include "dpp_app_message.h"
 
+
 /*
  * S T R U C T S
  */
-
-/* for all following structs, force alignment to 1 byte */
-#pragma pack(1)
 
 
 #define DPP_NODE_INFO_LEN   46          /* bytes */
@@ -160,14 +164,14 @@ typedef struct {
   uint16_t            fw_ver;           /* firmware version: human-readable (e.g. ABBCC where A: major, B: minor, C: patch */
   uint32_t            sw_rev_id;        /* repository revision number (GIT or SVN) */
   uint32_t            config;           /* bitfield for custom (application specific) compile-time configuration settings */
-} dpp_node_info_t;
+} __attribute__((packed)) dpp_node_info_t;
 
 
 #define DPP_EVENT_LEN       6
 typedef struct {
   dpp_event_type_t    type;       /* event type / id */
   uint32_t            value;      /* event value / subtype */
-} dpp_event_t;
+} __attribute__((packed)) dpp_event_t;
 
 
 #define DPP_COMMAND_HDR_LEN 2
@@ -177,8 +181,8 @@ typedef struct {
     uint8_t           arg[DPP_MSG_PAYLOAD_LEN - DPP_COMMAND_HDR_LEN];   /* arguments (length depends on command) */
     uint16_t          arg16[(DPP_MSG_PAYLOAD_LEN - DPP_COMMAND_HDR_LEN) / 2];
     uint32_t          arg32[(DPP_MSG_PAYLOAD_LEN - DPP_COMMAND_HDR_LEN) / 4];
-  };
-} dpp_command_t;
+  } __attribute__((packed));
+} __attribute__((packed)) dpp_command_t;
 
 
 /* helper struct for dpp_ack_cmd_t */
@@ -189,10 +193,11 @@ typedef struct {
     struct {
       dpp_command_type_t  type;         /* command */
       uint16_t            arg;          /* argument */
-    } cmd;
+    } __attribute__((packed)) cmd;
     uint32_t              cmd32;
-  };
-} dpp_cmd_min_t;
+  } __attribute__((packed));
+} __attribute__((packed)) dpp_cmd_min_t;
+ASSERT_SIZE(dpp_cmd_min_t, DPP_CMD_MIN_LEN);
 
 /* combined acknowledgement + commands */
 #define DPP_ACK_CMD_LEN(ack_cmd)  ((ack_cmd)->num_cmds * DPP_CMD_MIN_LEN + 4)
@@ -201,7 +206,7 @@ typedef struct {
   uint16_t            ack_seq_no;     /* sequence no. of the acknowledged packet */
   uint16_t            num_cmds;       /* number of node ID + command tuples (note: use 16 bits for better alignment) */
   dpp_cmd_min_t       commands[DPP_ACK_MAX_CMDS];    /* list of commands */
-} dpp_ack_cmd_t;
+} __attribute__((packed)) dpp_ack_cmd_t;
 
 
 /* combined (APP + COM) minimal health message */
@@ -222,21 +227,22 @@ typedef struct {
   uint16_t            radio_tx_dc;    /* TX duty cycle (COM) [10^-2 %] */
   uint16_t            events;         /* bit field to indicate events that occurred */
   uint16_t            config;         /* contains a part of the current node configuration (bit field) */
-} dpp_health_min_t;
-
+} __attribute__((packed)) dpp_health_min_t;
+ASSERT_SIZE(dpp_health_min_t, DPP_HEALTH_MIN_LEN);
 
 /* helper structs for dpp_data_aggr_t to create tuples of node ID and some other struct */
 #define DPP_DATA_AGGR_HEALTH_MIN_LEN    (2 + DPP_HEALTH_MIN_LEN)
 typedef struct {
   uint16_t            node_id;
   dpp_health_min_t    health_min;
-} dpp_data_aggr_health_min_t;
+} __attribute__((packed)) dpp_data_aggr_health_min_t;
+ASSERT_SIZE(dpp_data_aggr_health_min_t, DPP_DATA_AGGR_HEALTH_MIN_LEN);
 
 #define DPP_DATA_AGGR_GEO_ACQ_MIN_LEN   (2 + DPP_GEOPHONE_ACQ_MIN_LEN)
 typedef struct {
   uint16_t                node_id;
   dpp_geophone_acq_min_t  geo_acq_min;
-} dpp_data_aggr_geo_acq_min_t;
+} __attribute__((packed)) dpp_data_aggr_geo_acq_min_t;
 
 /* for general data aggregation (several 'blocks' of the same type of data sequentialized) */
 #define DPP_DATA_AGGR_HDR_LEN     2
@@ -247,8 +253,8 @@ typedef struct {
   union {
     dpp_data_aggr_health_min_t  health_blocks[(DPP_MSG_PAYLOAD_LEN - DPP_DATA_AGGR_HDR_LEN) / DPP_DATA_AGGR_HEALTH_MIN_LEN];
     dpp_data_aggr_geo_acq_min_t geo_acq_blocks[(DPP_MSG_PAYLOAD_LEN - DPP_DATA_AGGR_HDR_LEN) / DPP_DATA_AGGR_GEO_ACQ_MIN_LEN];
-  };
-} dpp_data_aggr_t;
+  } __attribute__((packed));
+} __attribute__((packed)) dpp_data_aggr_t;
 
 
 #define DPP_FW_HDR_LEN        4
@@ -259,35 +265,35 @@ typedef struct {
 #define DPP_FW_REQ_MAX_BLOCKS ((DPP_MSG_PAYLOAD_LEN - 2 - DPP_FW_HDR_LEN) / 2)
 
 typedef struct {
-  dpp_fw_type_t type : 8;
+  dpp_fw_type_t type;
   uint8_t       component_id;
   uint16_t      version;
   union {
     struct {
       uint32_t  len;    /* total length in bytes */
       uint32_t  crc;    /* 32bit CRC over complete FW data ('len' bytes) */
-    } info;
+    } __attribute__((packed)) info;
     struct {
       uint16_t  ofs;    /* offset = block ID (starting from 0) */
       uint8_t   data[DPP_FW_BLOCK_SIZE];
-    } data;
+    } __attribute__((packed)) data;
     struct {
       uint16_t  num;    /* 16-bit to avoid alignment issues */
       uint16_t  block_ids[DPP_FW_REQ_MAX_BLOCKS];
-    } req;
-  };
-} dpp_fw_t;
+    } __attribute__((packed)) req;
+  } __attribute__((packed));
+} __attribute__((packed)) dpp_fw_t;
 
 
 /* header of a DPP message */
 typedef struct {
   uint16_t            device_id;        /* sender node ID */
-  dpp_message_type_t  type : 8;         /* force 1 byte */
+  dpp_message_type_t  type;
   uint8_t             payload_len;      /* payload length [bytes] */
   uint16_t            target_id;        /* recipient device ID */
   uint16_t            seqnr;            /* sequence number */
   uint64_t            generation_time;  /* packet generation time (us) */
-} dpp_header_t;
+} __attribute__((packed)) dpp_header_t;
 
 
 /* application layer packet format (a packet is called 'message') */
@@ -318,17 +324,17 @@ typedef struct {
     dpp_ack_cmd_t       ack_cmd;
     uint8_t             payload[DPP_MSG_PAYLOAD_LEN + DPP_MSG_CRC_LEN];
     uint16_t            payload16[DPP_MSG_PAYLOAD_LEN / 2]; /* rounded down! */
-  };
-} dpp_message_t;
+  } __attribute__((packed));
+} __attribute__((packed)) dpp_message_t;
 
 
 /* application layer packet format (minimal type) */
 typedef struct {
   struct {
-    uint16_t            device_id;        /* sender node ID */
-    dpp_message_type_t  type : 8;         /* message type (MSB must be set!) */
-    uint8_t             payload_len;      /* payload length [bytes] */
-  } header;
+    uint16_t            device_id;       /* sender node ID */
+    dpp_message_type_t  type;            /* message type (MSB must be set!) */
+    uint8_t             payload_len;     /* payload length [bytes] */
+  } __attribute__((packed)) header;
   union {
     dpp_com_health_t    com_health;
     dpp_app_health_t    app_health;
@@ -350,11 +356,8 @@ typedef struct {
     dpp_ack_cmd_t       ack_cmd;
     uint8_t             payload[DPP_MSG_MIN_PAYLOAD_LEN + DPP_MSG_CRC_LEN];
     uint16_t            payload16[DPP_MSG_MIN_PAYLOAD_LEN / 2];
-  };
-} dpp_message_min_t;
-
-
-#pragma pack()    /* restore default structure packing rule */
+  } __attribute__((packed));
+} __attribute__((packed)) dpp_message_min_t;
 
 
 /*
@@ -383,9 +386,9 @@ typedef struct {
   #error "DPP_FW_BLOCK_SIZE is too big"
 #endif /* DPP_FW_BLOCK_SIZE */
 
-_Static_assert(sizeof(dpp_header_t) == DPP_MSG_HDR_LEN, "dpp_header_t is not DPP_MSG_HDR_LEN bytes in size!");
-_Static_assert(sizeof(dpp_message_t) == DPP_MSG_PKT_LEN, "dpp_message_t is not DPP_MSG_PKT_LEN bytes in size!");
-_Static_assert(sizeof(dpp_message_min_t) == DPP_MSG_PKT_LEN, "dpp_message_min_t is not DPP_MSG_PKT_LEN bytes in size!");
+ASSERT_SIZE(dpp_header_t, DPP_MSG_HDR_LEN);
+ASSERT_SIZE(dpp_message_t, DPP_MSG_PKT_LEN);
+ASSERT_SIZE(dpp_message_min_t, DPP_MSG_PKT_LEN);
 
 
 #endif /* __DPP_MESSAGE_H__ */

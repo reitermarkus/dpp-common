@@ -41,6 +41,7 @@
 #ifndef __DPP_COMPONENT_ID_H__
 #define __DPP_COMPONENT_ID_H__
 
+
 enum {
   DPP_COMPONENT_ID_INVALID    = 0,
   DPP_COMPONENT_ID_CC430      = 1,  /* ComBoard with the CC430 */
@@ -53,7 +54,7 @@ enum {
   DPP_COMPONENT_ID_BASEBOARD  = 8,  /* Baseboard */
 
   DPP_COMPONENT_ID_LASTID     = 0xff
-};
+} __attribute__((packed));
 
 
 #endif /* __DPP_COMPONENT_ID_H__ */

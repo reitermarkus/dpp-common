@@ -28,8 +28,8 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/* 
- * dpp types 
+/*
+ * dpp types
  * MASTER file
  */
 
@@ -42,14 +42,14 @@ typedef enum {
   /* general events */
   DPP_COMMAND_INVALID    = 0,
   DPP_COMMAND_RESET      = 1,
-  
+
   /* application specific commands */
   DPP_COMMAND_CC430      = ((uint16_t)DPP_COMPONENT_ID_CC430 << 8),
 #include "types/dpp_cc430_command_type.h"
-  
+
   DPP_COMMAND_WGPS2      = ((uint16_t)DPP_COMPONENT_ID_WGPS2 << 8),
 #include "types/dpp_wgps_command_type.h"
-  
+
   DPP_COMMAND_GEOPHONE   = ((uint16_t)DPP_COMPONENT_ID_GEOPHONE << 8),
 #include "types/dpp_geophone_command_type.h"
 
@@ -69,7 +69,8 @@ typedef enum {
 #include "types/dpp_baseboard_command_type.h"
 
   DPP_COMMAND_LASTID = 0xffff
-} dpp_command_type_t;
+} __attribute__((packed)) dpp_command_type_t;
+ASSERT_SIZE(dpp_command_type_t, 2);
 
 
 /* dpp event types */
@@ -80,10 +81,10 @@ typedef enum {
   /* application specific events */
   DPP_EVENT_CC430        = ((uint16_t)DPP_COMPONENT_ID_CC430 << 8),
 #include "types/dpp_cc430_event_type.h"
-  
+
   DPP_EVENT_WGPS2        = ((uint16_t)DPP_COMPONENT_ID_WGPS2 << 8),
 #include "types/dpp_wgps_event_type.h"
-  
+
   DPP_EVENT_GEOPHONE     = ((uint16_t)DPP_COMPONENT_ID_GEOPHONE << 8),
 #include "types/dpp_geophone_event_type.h"
 
@@ -101,20 +102,21 @@ typedef enum {
 
   DPP_EVENT_BASEBOARD    = ((uint16_t)DPP_COMPONENT_ID_BASEBOARD << 8),
 #include "types/dpp_baseboard_event_type.h"
-  
+
   DPP_EVENT_LASTID       = 0xffff
-} dpp_event_type_t;
+} __attribute__((packed)) dpp_event_type_t;
+ASSERT_SIZE(dpp_event_type_t, 2);
 
 
 /* dpp fw packet types */
 typedef enum {
-  DPP_FW_TYPE_INVALID = 0,
+  DPP_FW_TYPE_INVALID = (uint8_t)0,
   DPP_FW_TYPE_DATA,     /* FW data block ('data') */
   DPP_FW_TYPE_CHECK,    /* request FW verification ('info') */
   DPP_FW_TYPE_READY,    /* response to a FW validation request (header only, no payload) */
   DPP_FW_TYPE_DATAREQ,  /* request missing FW data packets ('req') */
   DPP_FW_TYPE_UPDATE,   /* initiate the FW update (header only, no payload) */
-} dpp_fw_type_t;
-
+} __attribute__((packed)) dpp_fw_type_t;
+ASSERT_SIZE(dpp_fw_type_t, 1);
 
 #endif /* __DPP_TYPE_H__ */

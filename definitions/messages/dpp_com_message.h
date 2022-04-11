@@ -38,11 +38,9 @@
 #define __DPP_COM_MESSAGE_H__
 
 
-/* 
+/*
  * S T R U C T S
  */
-
-#pragma pack(1)     /* force alignment to 1 byte */
 
 
 #define DPP_COM_HEALTH_LEN    28    /* bytes */
@@ -61,13 +59,14 @@ typedef struct {
   uint16_t radio_rx_dc;   /* Radio transmit duty cycle [10^-2 %] */
   uint16_t radio_tx_dc;   /* Radio listen duty cycle [10^-2 %] */
   uint16_t radio_per;     /* Radio packet error rate [10^-2 %] */
-  
+
   uint16_t rx_cnt;        /* Number of successfully received packets */
   uint8_t  tx_queue;      /* Number of packets in the transmit buffer */
   uint8_t  rx_queue;      /* Number of packets in the receive buffer */
   uint8_t  tx_dropped;    /* Dropped packets due to TX queue full */
   uint8_t  rx_dropped;    /* Dropped packets due to RX queue full */
-} dpp_com_health_t;
+} __attribute__((packed)) dpp_com_health_t;
+ASSERT_SIZE(dpp_com_health_t, DPP_COM_HEALTH_LEN);
 
 
 #define DPP_LWB_HEALTH_LEN    15   /* bytes */
@@ -84,7 +83,8 @@ typedef struct {
   uint8_t  unsynced_cnt;  /* Lost sync counter */
   uint8_t  drift;         /* estimated drift in ppm */
   uint8_t  bus_load;      /* bus utilization in % */
-} dpp_lwb_health_t;
+} __attribute__((packed)) dpp_lwb_health_t;
+ASSERT_SIZE(dpp_lwb_health_t, DPP_LWB_HEALTH_LEN);
 
 
 /* response to a 'get'/'read' command */
@@ -93,10 +93,7 @@ typedef struct {
   dpp_command_type_t type;                                                  /* what was the command */
   uint16_t           arg;                                                   /* what was the argument */
   uint8_t            res[DPP_MSG_PAYLOAD_LEN - DPP_COM_RESPONSE_HDR_LEN];   /* result / response (binary data) */
-} dpp_com_response_t;
-
-
-#pragma pack()
+} __attribute__((packed)) dpp_com_response_t;
 
 
 #endif /* __DPP_COM_MESSAGE_H__ */
