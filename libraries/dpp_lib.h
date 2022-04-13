@@ -115,6 +115,9 @@ uint32_t hexstr_to_uint32(const char* str);
 uint32_t uint16_to_str(uint16_t val, char* out_buffer);
 uint32_t bytes_to_hexstr(const uint8_t* bytes, uint32_t num_bytes, char* out_buffer, uint32_t buffer_size);
 int32_t  str_to_int32(const char* str);
+void     base64_encode(const uint8_t* input, uint32_t len, char* out_buf, uint32_t buf_len);
+uint32_t base64_decode_char(unsigned char c);
+void     base64_decode(const char* input, uint32_t len, uint8_t* out_buf, uint32_t buf_len);
 
 void     memb_init(memb_t memb);
 void*    memb_allocate_block(memb_t memb);
