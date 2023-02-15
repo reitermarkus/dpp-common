@@ -107,5 +107,7 @@ EVENT_GEOPHONE3X_GNSS_CRC_ERR,        /* 0x37 | GNSS message CRC error */
 EVENT_GEOPHONE3X_RTC_SYNC,            /* 0x38 | RTC has been synced */
 EVENT_GEOPHONE3X_GNSS_UART_ERR,       /* 0x39 | GNSS UART error */
 
+EVENT_GEOPHONE3X_TASK_POSTPONED,      /* 0x40 | Task postponed (argument: task ID + duration) */
+
 
 /* Label --------------------------- | #No. | Description ----------------------------*/
