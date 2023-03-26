@@ -69,6 +69,15 @@
 #ifndef MAX
 #define MAX(x, y)               (((x) > (y)) ? (x) : (y))
 #endif
+#ifndef CLAMP
+#define CLAMP(x, lower, upper)  if ((x) > upper) { x = upper; } else if ((x) < lower) { x = lower; }
+#endif
+#ifndef CLAMP_UINT16
+#define CLAMP_UINT16(x)         if ((x) > UINT16_MAX) { x = UINT16_MAX; }
+#endif
+#ifndef CLAMP_UINT8
+#define CLAMP_UINT8(x)          if ((x) > UINT8_MAX) { x = UINT8_MAX; }
+#endif
 
 
 /* --- typedefs --- */
