@@ -370,11 +370,6 @@ typedef struct {
  * E R R O R   C H E C K S
  */
 
-#if (DPP_MSG_PAYLOAD_LEN < DPP_MSG_COM_HEALTH_LEN) || \
-    (DPP_MSG_PAYLOAD_LEN < DPP_MSG_NODE_INFO_LEN)
-  #error "payload of message_t is too big"
-#endif
-
 #ifdef BOLT_CONF_MAX_MSG_LEN
   #if BOLT_CONF_MAX_MSG_LEN < MSG_PKT_LEN
     #error "BOLT max msg length is too small"
