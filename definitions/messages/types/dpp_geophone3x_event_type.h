@@ -58,15 +58,15 @@ EVENT_GEOPHONE3X_CONFIG_RD_ERR,       /* 0x0B | Config read from SD error */
 EVENT_GEOPHONE3X_CONFIG_SYNTAX_ERR,   /* 0x0C | Config syntax error */
 EVENT_GEOPHONE3X_TSYNC_INV_VAL,       /* 0x0D | Potentially invalid timestamp received */
 EVENT_GEOPHONE3X_NA_0x0E,             /* 0x0E | */
-EVENT_GEOPHONE3X_NA_0x0F,             /* 0x0F | */
+EVENT_GEOPHONE3X_CRIT_ERROR,          /* 0x0F | Critical error (Error Handler called) */
 
 EVENT_GEOPHONE3X_CMD_RESET,           /* 0x10 | APP CMD: reset */
 EVENT_GEOPHONE3X_CMD_SELFTEST,        /* 0x11 | APP CMD: self-test */
 EVENT_GEOPHONE3X_CMD_EXTTRG,          /* 0x12 | APP CMD: external trigger */
 EVENT_GEOPHONE3X_CMD_GAIN1,           /* 0x13 | APP CMD: triggering gain stage 1 */
 EVENT_GEOPHONE3X_CMD_GAIN2,           /* 0x14 | APP CMD: triggering gain stage 2 */
-EVENT_GEOPHONE3X_CMD_TRG_TH_POS,      /* 0x15 | APP CMD: positive trigger threshold value*/
-EVENT_GEOPHONE3X_CMD_TRG_TH_NEG,      /* 0x16 | APP CMD: negative trigger threshold value*/
+EVENT_GEOPHONE3X_CMD_TRG_TH_POS,      /* 0x15 | APP CMD: positive trigger threshold value */
+EVENT_GEOPHONE3X_CMD_TRG_TH_NEG,      /* 0x16 | APP CMD: negative trigger threshold value */
 EVENT_GEOPHONE3X_CMD_POSTTRG,         /* 0x17 | APP CMD: set post-triggering. Value: interval [s] */
 EVENT_GEOPHONE3X_CMD_TIMEOUT,         /* 0x18 | APP CMD: set sampling timeout. Value: interval [s] */
 EVENT_GEOPHONE3X_CMD_PGA,             /* 0x19 | APP CMD: set ADC PGA. Value: gain */
@@ -110,7 +110,6 @@ EVENT_GEOPHONE3X_GNSS_ERR,            /* 0x39 | GNSS error (argument: error code
 EVENT_GEOPHONE3X_TASK_POSTPONED,      /* 0x40 | Task postponed (argument: task ID + duration in s) */
 EVENT_GEOPHONE3X_TASK_SEMAPHORE,      /* 0x41 | Failed to acquire a semaphore (argument: task ID) */
 EVENT_GEOPHONE3X_TASK_RUNTIME,        /* 0x42 | Task runtime exceeded threshold (argument: task ID + duration in ms) */
-
 EVENT_GEOPHONE3X_TASKS_STOPPED,       /* 0x43 | All tasks stopped in preparation to enter sleep mode */
 
 

@@ -42,15 +42,15 @@
  * add a comma after each define!
  */
 
-/* Label ------------------- | #No. | Description ----------------------------*/
+/* Label ------------------------ | #No. | Description ----------------------------*/
 
-CMD_RESET,                  /* 0x01 | Perform Reset */
-CMD_SELFTEST,               /* 0x02 | Perform SelfTest */
-CMD_GPS_SAMPLING,           /* 0x03 | Set GPS sampling rate. Value: 2 bytes, [sec] */
-CMD_STATUS_SAMPLING,        /* 0x04 | Set Status sampling rate. Value: 2 bytes, [sec] */
-CMD_HEALTH_SAMPLING,        /* 0x05 | Set Health sampling rate. Value: 2 bytes, [sec] */
-CMD_LO_PWR_ENTRY_VDC,       /* 0x06 | Set Low Power Entry Voltage. Value: 2 bytes, [10^-3 V] */
-CMD_LO_PWR_EXIT_VDC,        /* 0x07 | Set Low Power Exit Voltage. Value: 2 bytes, [10^-3 V] */
-CMD_SCHEDULE,               /* 0x08 | Set GPS Schedule. Value: 5 bytes [day_selector_bitfield, hi_start_hour, hi_stop_hour, lo_start_hour, lo_stop_hour] */
+CMD_WGPS_RESET,                  /* 0x01 | Perform Reset */
+CMD_WGPS_SELFTEST,               /* 0x02 | Perform SelfTest */
+CMD_WGPS_GPS_SAMPLING,           /* 0x03 | Set GPS sampling rate. Value: 2 bytes, [sec] */
+CMD_WGPS_STATUS_SAMPLING,        /* 0x04 | Set Status sampling rate. Value: 2 bytes, [sec] */
+CMD_WGPS_HEALTH_SAMPLING,        /* 0x05 | Set Health sampling rate. Value: 2 bytes, [sec] */
+CMD_WGPS_LO_PWR_ENTRY_VDC,       /* 0x06 | Set Low Power Entry Voltage. Value: 2 bytes, [10^-3 V] */
+CMD_WGPS_LO_PWR_EXIT_VDC,        /* 0x07 | Set Low Power Exit Voltage. Value: 2 bytes, [10^-3 V] */
+CMD_WGPS_SCHEDULE,               /* 0x08 | Set GPS Schedule. Value: 5 bytes [day_selector_bitfield, hi_start_hour, hi_stop_hour, lo_start_hour, lo_stop_hour] */
 
 
