@@ -107,10 +107,10 @@ EVENT_GEOPHONE3X_GNSS_CRC_ERR,        /* 0x37 | GNSS message CRC error */
 EVENT_GEOPHONE3X_RTC_SYNC,            /* 0x38 | RTC has been synced */
 EVENT_GEOPHONE3X_GNSS_ERR,            /* 0x39 | GNSS error (argument: error code) */
 
-EVENT_GEOPHONE3X_TASK_POSTPONED,      /* 0x40 | Task postponed (argument: task ID + duration in s) */
-EVENT_GEOPHONE3X_TASK_SEMAPHORE,      /* 0x41 | Failed to acquire a semaphore (argument: task ID) */
-EVENT_GEOPHONE3X_TASK_RUNTIME,        /* 0x42 | Task runtime exceeded threshold (argument: task ID + duration in ms) */
-EVENT_GEOPHONE3X_TASKS_STOPPED,       /* 0x43 | All tasks stopped in preparation to enter sleep mode */
+EVENT_GEOPHONE3X_TASK_POSTPONED,      /* 0x3A | Task postponed (argument: task ID + duration in s) */
+EVENT_GEOPHONE3X_TASK_SEMAPHORE,      /* 0x3B | Failed to acquire a semaphore (argument: task ID) */
+EVENT_GEOPHONE3X_TASK_RUNTIME,        /* 0x3C | Task runtime exceeded threshold (argument: task ID + duration in ms) */
+EVENT_GEOPHONE3X_TASKS_STOPPED,       /* 0x3D | All tasks stopped in preparation to enter sleep mode */
 
 
 /* Label --------------------------- | #No. | Description ----------------------------*/
