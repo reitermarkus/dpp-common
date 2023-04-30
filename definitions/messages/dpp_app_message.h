@@ -177,6 +177,60 @@ typedef struct {
 } dpp_geophone_adc_t;
 
 
+#define DPP_GEO_SPEC_INFO_TYPE_FFT            0x00
+#define DPP_GEO_SPEC_INFO_TYPE_PSD            0x01
+#define DPP_GEO_SPEC_INFO_TYPE_MFCC           0x02
+#define DPP_GEO_SPEC_INFO_TYPE_RESERVED       0x03
+#define DPP_GEO_SPEC_INFO_TYPE_MASK           0x03
+#define DPP_GEO_SPEC_INFO_RATE_100HZ          0x04
+#define DPP_GEO_SPEC_INFO_RATE_125HZ          0x08
+#define DPP_GEO_SPEC_INFO_RATE_200HZ          0x0C
+#define DPP_GEO_SPEC_INFO_RATE_250HZ          0x10
+#define DPP_GEO_SPEC_INFO_RATE_500HZ          0x14
+#define DPP_GEO_SPEC_INFO_RATE_1000HZ         0x18
+#define DPP_GEO_SPEC_INFO_RATE_RESERVED       0x1C
+#define DPP_GEO_SPEC_INFO_RATE_MASK           0x1C
+#define DPP_GEO_SPEC_INFO_NFFT_128            0x20
+#define DPP_GEO_SPEC_INFO_NFFT_256            0x40
+#define DPP_GEO_SPEC_INFO_NFFT_512            0x60
+#define DPP_GEO_SPEC_INFO_NFFT_1024           0x80
+#define DPP_GEO_SPEC_INFO_NFFT_2048           0xA0
+#define DPP_GEO_SPEC_INFO_NFFT_4096           0xC0
+#define DPP_GEO_SPEC_INFO_NFFT_RESERVED       0xE0
+#define DPP_GEO_SPEC_INFO_NFFT_MASK           0xE0
+
+#define DPP_GEO_SPEC_ENC_TYPE_FLOAT32         0x00      /* 32-bit float (raw values) */
+#define DPP_GEO_SPEC_ENC_TYPE_UINT8           0x01      /* unsigned 8-bit integer in the form: -2 * dB_val */
+#define DPP_GEO_SPEC_ENC_TYPE_INT8            0x02      /* signed integer (dB value) */
+#define DPP_GEO_SPEC_ENC_TYPE_UINT16          0x03      /* unsigned 16-bit integer */
+#define DPP_GEO_SPEC_ENC_TYPE_MASK            0x03
+#define DPP_GEO_SPEC_ENC_BINS_1HZ_SUB         0x04      /* 1Hz bins (mean value), and values below 1Hz are included unbinned */
+#define DPP_GEO_SPEC_ENC_BINS_1HZ             0x08      /* 1Hz bins (mean value) */
+#define DPP_GEO_SPEC_ENC_BINS_2HZ             0x0C      /* 2Hz bins (mean value) */
+#define DPP_GEO_SPEC_ENC_BINS_5HZ             0x10      /* 5Hz bins (mean value) */
+#define DPP_GEO_SPEC_ENC_BINS_10HZ            0x14      /* 10Hz bins (mean value) */
+#define DPP_GEO_SPEC_ENC_BINS_RESERVED        0x18
+#define DPP_GEO_SPEC_ENC_BINS_RESERVED2       0x1C
+#define DPP_GEO_SPEC_ENC_BINS_MASK            0x1C
+#define DPP_GEO_SPEC_ENC_DECIMATION_2         0x20      /* decimation factor 2 (mean value) */
+#define DPP_GEO_SPEC_ENC_DECIMATION_4         0x40      /* decimation factor 4 (mean value) */
+#define DPP_GEO_SPEC_ENC_DECIMATION_8         0x60      /* decimation factor 8 (mean value) */
+#define DPP_GEO_SPEC_ENC_DECIMATION_16        0x80      /* decimation factor 8 (mean value) */
+#define DPP_GEO_SPEC_ENC_DECIMATION_LOG       0xA0      /* logarithmic decimation */
+#define DPP_GEO_SPEC_ENC_DECIMATION_RESERVED  0xC0
+#define DPP_GEO_SPEC_ENC_DECIMATION_RESERVED2 0xE0
+#define DPP_GEO_SPEC_ENC_DECIMATION_MASK      0xE0
+
+#define DPP_GEO_SPEC_HDR_LEN                  2
+
+/* Spectrogram */
+typedef struct {
+  uint8_t info;                   /* type (used as a bitfield) */
+  uint8_t enc;                    /* data encoding (used as a bitfield) */
+  uint8_t data[DPP_MSG_PAYLOAD_LEN - DPP_GEO_SPEC_HDR_LEN];
+} dpp_geophone_spec_t;
+
+
 #pragma pack()
 
 

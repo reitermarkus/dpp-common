@@ -103,6 +103,7 @@ typedef enum {
   DPP_MSG_TYPE_IMU          = 37,   /* imu data */
   DPP_MSG_TYPE_ADCDATA      = 38,   /* event acquisition (ADC) data */
   DPP_MSG_TYPE_INCLINO      = 39,   /* inclinometer data */
+  DPP_MSG_TYPE_GEO_SPEC     = 40,   /* geophone spectrogram (freq data) */
 
   /* event-driven specific message types */
   DPP_MSG_TYPE_STAG_WAKEUP  = 41,   /* Staggered Wakeup message */
@@ -312,9 +313,10 @@ typedef struct {
     dpp_lwb_health_t    lwb_health;
     dpp_geophone_acq_t  geo_acq;
     dpp_geophone_adc_t  geo_adc;
+    dpp_geophone_spec_t geo_spec;
     dpp_data_aggr_t     data_aggr;
     dpp_ack_cmd_t       ack_cmd;
-    uint8_t             payload[DPP_MSG_PAYLOAD_LEN + 2];   /* raw bytes (add +2 to increase overall structure size to include the crc!) */
+    uint8_t             payload[DPP_MSG_PAYLOAD_LEN + DPP_MSG_CRC_LEN];
     uint16_t            payload16[DPP_MSG_PAYLOAD_LEN / 2]; /* rounded down! */
   };
 } dpp_message_t;
@@ -323,9 +325,9 @@ typedef struct {
 /* application layer packet format (minimal type) */
 typedef struct {
   struct {
-    uint16_t            device_id;       /* sender node ID */
-    dpp_message_type_t  type : 8;        /* message type (MSB must be set!) */
-    uint8_t             payload_len;     /* payload length [bytes] */
+    uint16_t            device_id;        /* sender node ID */
+    dpp_message_type_t  type : 8;         /* message type (MSB must be set!) */
+    uint8_t             payload_len;      /* payload length [bytes] */
   } header;
   union {
     dpp_com_health_t    com_health;
@@ -343,9 +345,10 @@ typedef struct {
     dpp_lwb_health_t    lwb_health;
     dpp_geophone_acq_t  geo_acq;
     dpp_geophone_adc_t  geo_adc;
+    dpp_geophone_spec_t geo_spec;
     dpp_data_aggr_t     data_aggr;
     dpp_ack_cmd_t       ack_cmd;
-    uint8_t             payload[DPP_MSG_MIN_PAYLOAD_LEN + 2];   /* raw bytes */
+    uint8_t             payload[DPP_MSG_MIN_PAYLOAD_LEN + DPP_MSG_CRC_LEN];
     uint16_t            payload16[DPP_MSG_MIN_PAYLOAD_LEN / 2];
   };
 } dpp_message_min_t;
