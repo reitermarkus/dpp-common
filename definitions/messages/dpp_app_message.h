@@ -128,6 +128,15 @@ typedef struct {
 ASSERT_SIZE(dpp_gnss_sv_t, DPP_GNSS_SV_LEN);
 
 
+typedef enum {
+  DPP_ADC_SPS_1000 = 0, // 1 kHz
+  DPP_ADC_SPS_500  = 1, // 500 Hz
+  DPP_ADC_SPS_250  = 2, // 250 Hz
+  DPP_ADC_SPS_125  = 3, // 125 Hz
+} __attribute__((packed)) dpp_adc_sps_t;
+ASSERT_SIZE(dpp_adc_sps_t, 1);
+
+
 #define DPP_GEOPHONE_ACQ_LEN    65          /* bytes*/
 typedef struct {
   uint64_t          start_time;             /* Timestamp of trigger */
@@ -147,7 +156,7 @@ typedef struct {
   uint8_t           trg_source;             /* Source of initial trigger. 0: external | 1: positive threshold, 2: negative threshold */
   uint8_t           adc_pga;                /* ADC PGA value. 0: PGA is off. */
   uint32_t          acq_id;                 /* Acquisition ID */
-  uint8_t           adc_sps;                /* ADC rate (sampling frequency), 0 = 1kHz, 1 = 500Hz, 2 = 250Hz, 3 = 125Hz */
+  dpp_adc_sps_t     adc_sps;                /* ADC rate (sampling frequency) */
 } __attribute__((packed)) dpp_geophone_acq_t;
 ASSERT_SIZE(dpp_geophone_acq_t, DPP_GEOPHONE_ACQ_LEN);
 
