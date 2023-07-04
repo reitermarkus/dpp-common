@@ -72,12 +72,12 @@
 
 
 /* special (reserved) values for data fields */
-const uint8_t DPP_MSG_INV_UINT8   = 0xff;            /* used to mark a uint8_t data value as invalid */
-const int8_t DPP_MSG_INV_INT8     = 0x80;
-const uint16_t DPP_MSG_INV_UINT16 = 0xffff;
-const int16_t DPP_MSG_INV_INT16   = 0x8000;
-const uint32_t DPP_MSG_INV_UINT32 = 0xffffffff;
-const int32_t DPP_MSG_INF_INT32   = 0x80000000;
+static const uint8_t DPP_MSG_INV_UINT8   = 0xff;            /* used to mark a uint8_t data value as invalid */
+static const int8_t DPP_MSG_INV_INT8     = 0x80;
+static const uint16_t DPP_MSG_INV_UINT16 = 0xffff;
+static const int16_t DPP_MSG_INV_INT16   = 0x8000;
+static const uint32_t DPP_MSG_INV_UINT32 = 0xffffffff;
+static const int32_t DPP_MSG_INF_INT32   = 0x80000000;
 
 
 /* the message type (7 bits available, MSB is reserved) */
